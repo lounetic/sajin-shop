@@ -1,0 +1,174 @@
+{% extends 'base-header.html' %} {% load static %}
+{% block title %} ثبت سفارش {% endblock %}
+{% block body %}
+      <main class="flex-grow bg-background pb-14 pt-36 xs:pt-36">
+        <div class="container">
+          <!-- breadCrumb -->
+          <div class="col-span-12 mb-2 rounded-lg bg-muted lg:mb-6">
+            <ol class="grid grid-cols-3 overflow-hidden rounded-lg">
+              <li
+                class="flex flex-col items-center justify-center gap-2 p-4 text-xs text-primary opacity-50 sm:text-sm md:text-base"
+              >
+                <svg class="h-6 w-6 md:h-8 md:w-8">
+                  <use xlink:href="#check" />
+                </svg>
+                <p class="leading-none">سبد خرید</p>
+              </li>
+              <li
+                class="flex flex-col items-center justify-center gap-2 p-4 text-xs text-primary opacity-50 sm:text-sm md:text-base"
+              >
+                <svg class="h-6 w-6 md:h-8 md:w-8">
+                  <use xlink:href="#check" />
+                </svg>
+                <p class="leading-none">شیوه ارسال</p>
+              </li>
+              <li
+                class="flex flex-col items-center justify-center gap-2 bg-primary/10 p-4 text-xs text-primary /10 sm:text-sm md:text-base"
+              >
+                <svg class="h-6 w-6 md:h-8 md:w-8">
+                  <use xlink:href="#credit" />
+                </svg>
+
+                <p class="leading-none">پرداخت</p>
+              </li>
+            </ol>
+          </div>
+
+          <div class="mx-auto max-w-[450px] rounded-lg bg-muted p-5">
+            <!-- Head -->
+            <h1 class="mb-8 text-center text-lg lg:text-xl">جزئیات سفارش</h1>
+
+            <div class="mb-6">
+              <!-- Coupon -->
+              <div class="mb-4 flex items-center justify-between gap-x-2">
+                <div
+                  class="flex w-full items-center justify-between gap-x-2 rounded-lg border pl-4"
+                >
+                  <label
+                    for="coupon"
+                    class="relative block w-full rounded-lg shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="coupon"
+                      class="text-eft peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="کد تخفیف"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/90 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      کد تخفیف
+                    </span>
+                  </label>
+                  <button class="btn-primary-nobg py-2">اعمال</button>
+                </div>
+              </div>
+
+              <!-- delivery price -->
+              <div class="flex items-center justify-between gap-x-2 py-6">
+                <div class="text-sm text-text/90 lg:text-base">هزینه ارسال</div>
+
+                <!-- <div class="text-sky-500 dark:text-sky-400  text-sm lg:text-base">
+                      <span class="font-bold">60,000</span>
+                      <span class="text-xs lg:text-sm">تومان</span>
+                    </div> -->
+
+                <!-- <div class="text-sky-500 dark:text-sky-400  text-sm lg:text-base">
+                      <span class="font-bold">
+                        پرداخت در مقصد
+                      </span>
+                    </div> -->
+                <div
+                  class="text-sm text-sky-500 dark:text-sky-400 lg:text-base"
+                >
+                  <span class="font-bold"> رایگان </span>
+                </div>
+              </div>
+              <!-- delivery price -->
+              <div class="flex items-center justify-between gap-x-2 py-6">
+                <div class="text-sm text-text/90 lg:text-base">تخفیف</div>
+
+                <div
+                  class="text-sm font-medium text-red-500 dark:text-red-400 lg:text-base"
+                >
+                  <span class="font-bold">1,220,000</span>
+                  <span class="text-xs lg:text-sm">تومان</span>
+                </div>
+              </div>
+
+              <!-- Order final price -->
+              <div class="flex items-center justify-between gap-x-2 py-6">
+                <div class="text-sm text-text/90 lg:text-base">
+                  مبلغ قابل پرداخت
+                </div>
+
+                <div class="text-sm text-primary lg:text-base">
+                  <span class="font-bold">2,400,000</span>
+                  <span class="text-xs lg:text-sm">تومان</span>
+                </div>
+              </div>
+              <!-- Payment gateway -->
+
+              <fieldset
+                class="flex flex-wrap items-center justify-evenly gap-4 space-y-2"
+              >
+                <legend class="sr-only">Gateway</legend>
+                <!-- gateway item -->
+
+                <div>
+                  <input
+                    type="radio"
+                    name="gateway"
+                    value="gateway-1"
+                    id="gateway-1"
+                    class="peer hidden"
+                  />
+
+                  <label
+                    for="gateway-1"
+                    class="relative block cursor-pointer rounded-lg border p-4 shadow-base peer-checked:border-emerald-500 hover:border-border/50 peer-checked:dark:border-emerald-400 dark:hover:border-white/10"
+                  >
+                    <div class="flex items-center gap-x-4">
+                      <img
+                        src="./assets/images/others/zarinpal.png"
+                        class="w-8 rounded-lg"
+                        alt=""
+                      />
+                      <p class="text-text/90">زرین پال</p>
+                    </div>
+                  </label>
+                </div>
+
+                <div>
+                  <input
+                    type="radio"
+                    name="gateway"
+                    value="gateway-2"
+                    id="gateway-2"
+                    class="peer hidden"
+                  />
+
+                  <label
+                    for="gateway-2"
+                    class="relative block cursor-pointer rounded-lg border p-4 shadow-base peer-checked:border-emerald-500 hover:border-border/50 peer-checked:dark:border-emerald-400 dark:hover:border-white/10"
+                  >
+                    <div class="flex items-center gap-x-4">
+                      <img
+                        src="./assets/images/others/saman.png"
+                        class="w-8 rounded-lg"
+                        alt=""
+                      />
+                      <p class="text-text/90">بانک سامان</p>
+                    </div>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+            <div>
+              <a href="#" class="btn-primary py-4"> پرداخت </a>
+            </div>
+          </div>
+        </div>
+      </main>
+{% endblock %}

@@ -1,0 +1,1168 @@
+{% extends 'base-sidebar.html' %}
+{% load static %}
+{% block title %} اطلاعات حساب کاربری {% endblock %}
+{% block content %}
+<!-- content -->
+<div class="col-span-12 lg:col-span-9">
+              <div class="rounded-lg bg-muted p-5 shadow-base">
+                <!-- Title -->
+                <h1 class="relative mb-16 w-fit text-xl font-medium">
+                  اطلاعات حساب کاربری شما
+                  <span
+                    class="absolute right-0 top-10 h-[3px] w-full rounded-full bg-primary"
+                  >
+                  </span>
+                </h1>
+                <!-- Content -->
+                <div class="grid grid-cols-2 gap-4">
+                  <!-- full name -->
+                  <div class="col-span-2 sm:col-span-1">
+                    <button
+                      class="w-full"
+                      type="button"
+                      data-modal-target="fullname-modal"
+                      data-modal-toggle="fullname-modal"
+                    >
+                      <div
+                        class="relative rounded-lg border p-4 hover:border-border/50"
+                      >
+                        <div class="flex justify-between">
+                          <div class="flex flex-col items-start gap-y-2">
+                            <div class="text-text/90">نام و نام خانوادگی</div>
+                            <div class="mr-2 text-text/60">
+                              {% if request.user.first_name == "" %}{% if request.user.last_name == ""  %}
+                              <p>ثبت نشده</p>
+                              {% endif %}{% endif %}
+                              {{request.user.first_name}} {{request.user.last_name}}
+                            </div>
+                          </div>
+                          {% if request.user.first_name == "" and request.user.last_name == "" %}
+                          <svg class="h-6 w-6 text-primary">
+                            <use xlink:href="#plus" />
+                          </svg>
+                          {% else %}
+                          <svg class="h-6 w-6 text-primary">
+                            <use xlink:href="#edit" />
+                          </svg>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  <!-- national code -->
+                  <div class="col-span-2 sm:col-span-1">
+                    <button
+                      class="w-full"
+                      type="button"
+                      data-modal-target="nationalCode-modal"
+                      data-modal-toggle="nationalCode-modal"
+                    >
+                      <div
+                        class="relative rounded-lg border p-4 hover:border-border/50"
+                      >
+                        <div
+                          class="absolute inset-x-0 -bottom-2.5 mx-auto w-fit rounded-full bg-muted px-3 text-sm font-medium text-red-500 dark:text-red-400"
+                        >
+                          تایید نشده
+                        </div>
+                        <div class="flex justify-between">
+                          <div class="flex flex-col items-start gap-y-2">
+                            <div class="text-text/90">کد ملی</div>
+
+                            <div class="mr-2 text-text/60">ثبت نشده</div>
+                          </div>
+                          <svg class="h-6 w-6 text-primary">
+                            <use xlink:href="#plus" />
+                          </svg>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  <!-- phone number  -->
+                  <div class="col-span-2 sm:col-span-1">
+                    <button
+                      class="w-full"
+                      type="button"
+                      data-modal-target="phoneNumber-modal"
+                      data-modal-toggle="phoneNumber-modal"
+                    >
+                      <div
+                        class="relative rounded-lg border p-4 hover:border-border/50"
+                      >
+                        <div
+                          class="absolute inset-x-0 -bottom-2.5 mx-auto w-fit rounded-full bg-muted px-3 text-sm font-medium text-primary"
+                        >
+                          تایید شده
+                        </div>
+                        <div class="flex justify-between">
+                          <div class="flex flex-col items-start gap-y-2">
+                            <div class="text-text/90">شماره موبایل</div>
+
+                            <div class="mr-2 text-text/60">{{request.user.phone}}</div>
+                          </div>
+                          <svg class="h-6 w-6 text-primary">
+                            <use xlink:href="#edit" />
+                          </svg>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  <!-- email   -->
+                  <div class="col-span-2 sm:col-span-1">
+                    <button
+                      class="w-full"
+                      type="button"
+                      data-modal-target="email-modal"
+                      data-modal-toggle="email-modal"
+                    >
+                      <div
+                        class="relative rounded-lg border p-4 hover:border-border/50"
+                      >
+                        <div
+                          class="absolute inset-x-0 -bottom-2.5 mx-auto w-fit rounded-full bg-muted px-3 text-sm font-medium text-primary"
+                        >
+                          تایید شده
+                        </div>
+                        <div class="flex justify-between">
+                          <div class="flex flex-col items-start gap-y-2">
+                            <div class="text-text/90">ایمیل</div>
+
+                            <div class="mr-2 text-text/60">
+                              {{request.user.email}}
+                            </div>
+                          </div>
+                          <svg class="h-6 w-6 text-primary">
+                            <use xlink:href="#edit" />
+                          </svg>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  <!-- password   -->
+                  <div class="col-span-2 sm:col-span-1">
+                    <button
+                      class="w-full"
+                      type="button"
+                      data-modal-target="password-modal"
+                      data-modal-toggle="password-modal"
+                    >
+                      <div
+                        class="relative rounded-lg border p-4 hover:border-border/50"
+                      >
+                        <div class="flex justify-between">
+                          <div class="flex flex-col items-start gap-y-2">
+                            <div class="text-text/90">کلمه عبور</div>
+                            {% if is_password %}
+                            <div class="mr-2 select-none text-text/60">
+                              <input
+                                type="password"
+                                value="password"
+                                class="select-none bg-transparent"
+                                disabled
+                              />
+                            </div>
+                            {% else %}
+                            <div class="mr-2 text-text/60">ثبت نشده</div>
+                            {% endif %}
+                          </div>
+                          {% if is_password %}
+                          <svg class="h-6 w-6 text-primary">
+                            <use xlink:href="#edit" />
+                          </svg>
+                          {% else %}
+                          <svg class="h-6 w-6 text-primary">
+                            <use xlink:href="#plus" />
+                          </svg>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  <!-- birth date   -->
+                  <div class="col-span-2 sm:col-span-1">
+                    <button
+                      class="w-full"
+                      type="button"
+                      data-modal-target="birthDate-modal"
+                      data-modal-toggle="birthDate-modal"
+                    >
+                      <div
+                        class="relative rounded-lg border p-4 hover:border-border/50"
+                      >
+                        <div class="flex justify-between">
+                          <div class="flex flex-col items-start gap-y-2">
+                            <div class="text-text/90">تاریخ تولد</div>
+
+                            <div class="mr-2 select-none text-text/60">
+                              11 / 08 / 1380
+                            </div>
+                          </div>
+                          <svg class="h-6 w-6 text-primary">
+                            <use xlink:href="#edit" />
+                          </svg>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+      <!-- Mobile Profile Menu Drawer -->
+      <div
+        aria-labelledby="profile-menu-drawer-navigation-label"
+        class="fixed bottom-0 left-0 right-0 z-40 w-full translate-y-full rounded-t-3xl bg-muted transition-transform duration-300"
+        id="profile-menu-drawer-navigation"
+        tabindex="-1"
+      >
+        <div
+          class="flex items-center justify-between gap-x-4 border-b p-4 pb-5"
+        >
+          <h5 class="text-lg text-text/90">منوی پنل کاربری</h5>
+          <button
+            aria-controls="user-account-drawer-navigation"
+            class="inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-text/90 hover:bg-zinc-100 hover:text-gray-900 dark:hover:bg-black dark:hover:text-white"
+            data-drawer-hide="profile-menu-drawer-navigation"
+            type="button"
+          >
+            <svg class="h-5 w-5">
+              <use xlink:href="#close" />
+            </svg>
+
+            <span class="sr-only">Close menu</span>
+          </button>
+        </div>
+        <div class="p-4">
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="./profile-dashboard.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#home" />
+                  </svg>
+                  <div>پیشخوان</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-orders.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#order" />
+                  </svg>
+                  <div>سفارش ها</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-favorite.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#heart" />
+                  </svg>
+                  <div>علاقه‌مندی ها</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-recent.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#recent" />
+                  </svg>
+                  <div>بازدید های اخیر</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-notification.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#notification" />
+                  </svg>
+                  <div>پیام ها</div>
+                </div>
+                <div
+                  class="flex h-6 w-6 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white dark:bg-emerald-600"
+                >
+                  10
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-address.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#address" />
+                  </svg>
+                  <div>آدرس ها</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-edit.html"
+                class="profile-menu profile-menu-active flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#user-setting" />
+                  </svg>
+                  <div>اطلاعات حساب کاربری</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                class="flex items-center justify-between rounded-lg p-4 text-red-500 hover:bg-warning/10 dark:text-red-400 dark:hover:bg-red-400/10"
+                href="#"
+              >
+                <div class="flex items-center gap-x-2">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#exit"></use>
+                  </svg>
+                  <span> خروج </span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Full name modal -->
+      <form method="post">
+        {% csrf_token %}
+      <div
+        id="fullname-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-2xl">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">تغییر نام و نام خانوادگی</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="fullname-modal"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close"></use>
+                  </svg>
+
+                  <span class="sr-only">Close Modal</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="col-span-2 sm:col-span-1">
+                  <input type="hidden" name="form_type" value="change_fullname">
+                  <label
+                    for="name"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="name"
+                      name="first_name"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="نام "
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      نام
+                    </span>
+                  </label>
+                  <div class="my-2 h-6 text-red-500 dark:text-red-400"></div>
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                  <label
+                    for="family"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      name="last_name"
+                      id="family"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="نام خانوادگی"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      نام خانوادگی
+                    </span>
+                  </label>
+                  <div class="my-2 h-6 text-red-500 dark:text-red-400"></div>
+                </div>
+              </div>
+              <div class="flex items-center justify-end gap-x-4">
+                <input
+                  class="btn-primary w-full px-4 py-2 xs:w-24"
+                  type="submit"
+                  value="ویرایش"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+            </form>
+
+        <!-- national code modal -->
+      <div
+        id="nationalCode-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-md">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">ثبت کد ملی</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="nationalCode-modal"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close"></use>
+                  </svg>
+
+                  <span class="sr-only">Close Modal</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <div>
+                <label
+                  for="nationalCode"
+                  class="relative block rounded-lg border shadow-base"
+                >
+                  <input
+                    type="text"
+                    id="nationalCode"
+                    class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                    placeholder="کد ملی "
+                  />
+
+                  <span
+                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                  >
+                    کد ملی
+                  </span>
+                </label>
+                <div class="my-2 h-6"></div>
+              </div>
+              <div class="flex items-center justify-end gap-x-4">
+                <button
+                  class="btn-primary w-full px-4 py-2 xs:w-24"
+                  type="button"
+                >
+                  ویرایش
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- phone mumber modal -->
+      <form method="post">
+        {% csrf_token %}
+      <div
+        id="phoneNumber-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-md">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">تغییر شماره موبایل</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="phoneNumber-modal"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close"></use>
+                  </svg>
+
+                  <span class="sr-only">Close Modal</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <div>
+              <input type="hidden" name="form_type" value="change_number">
+                <label
+                  for="phoneNumber"
+                  class="relative block rounded-lg border shadow-base"
+                >
+                  <input
+                    type="text"
+                    id="phoneNumber"
+                    name="phone"
+                    dir="auto"
+                    class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 text-left placeholder-transparent focus:outline-none focus:ring-0"
+                    placeholder="شماره موبایل"
+                  />
+
+                  <span
+                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                  >
+                    شماره موبایل
+                  </span>
+                </label>
+                <div class="my-2 h-6 text-red-500 dark:text-red-400"></div>
+              </div>
+              <div class="flex items-center justify-end gap-x-4">
+                <input
+                  class="btn-primary w-full px-4 py-2 xs:w-fit"
+                  type="submit"
+                  value="ارسال کد تایید"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </form>
+<!--       email modal -->
+<!--      <form method="post">-->
+<!--        {% csrf_token %}-->
+<!--      <div-->
+<!--        id="email-modal"-->
+<!--        tabindex="-1"-->
+<!--        aria-hidden="true"-->
+<!--        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"-->
+<!--      >-->
+<!--        <div class="relative max-h-full w-full max-w-md">-->
+<!--          <div-->
+<!--            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"-->
+<!--          >-->
+<!--            <div class="px-4 py-5 sm:px-6">-->
+<!--              <div class="flex items-center justify-between">-->
+<!--                <h3 class="md:text-lg">تغییر ایمیل</h3>-->
+
+<!--                <button class=" " data-modal-hide="email-modal" type="button">-->
+<!--                  <svg class="h-5 w-5">-->
+<!--                    <use xlink:href="#close"></use>-->
+<!--                  </svg>-->
+
+<!--                  <span class="sr-only">Close Modal</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="space-y-6 px-4 py-5 sm:p-6">-->
+<!--              <div>-->
+<!--                <input type="hidden" name="form_type" value="change_email">-->
+<!--                <label-->
+<!--                  for="phoneNumber"-->
+<!--                  class="relative block rounded-lg border shadow-base"-->
+<!--                >-->
+<!--                  <input-->
+<!--                    type="text"-->
+<!--                    id="phoneNumber"-->
+<!--                    name="email"-->
+<!--                    dir="auto"-->
+<!--                    class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 text-left placeholder-transparent focus:outline-none focus:ring-0"-->
+<!--                    placeholder=" ایمیل"-->
+<!--                  />-->
+
+<!--                  <span-->
+<!--                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"-->
+<!--                  >-->
+<!--                    ایمیل-->
+<!--                  </span>-->
+<!--                </label>-->
+<!--                <div class="my-2 h-6 text-red-500 dark:text-red-400"></div>-->
+<!--              </div>-->
+<!--              <div class="flex items-center justify-end gap-x-4">-->
+<!--                <input-->
+<!--                  class="btn-primary w-full px-4 py-2 xs:w-fit"-->
+<!--                  type="submit"-->
+<!--                  value="ارسال کد تایید"-->
+<!--                >-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      </form>-->
+      <!-- password modal -->
+{% if is_password %}
+      <div
+        id="password-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-lg">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">تغییر رمز عبور</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="password-modal"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close"></use>
+                  </svg>
+
+                  <span class="sr-only">Close Modal</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <form method="post">
+                  {% csrf_token %}
+              <div>
+                <div class="mb-4">
+                    <div>
+                      <label
+                        for="old_password"
+                        class="relative block rounded-lg border shadow-base"
+                      >
+                        <input
+                          type="password"
+                          id="old_password"
+                          name="old_password"
+                          class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                          placeholder="تکرار کلمه عبور جدید"
+                        />
+
+                        <span
+                          class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                        >
+                          کلمه عبور فعلی
+                        </span>
+                      </label>
+                      <div
+                        class="my-2 h-6 text-red-500 dark:text-red-400"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <div>
+                      <input type="hidden" name="form_type" value="set_password">
+                      <label
+                        for="new_password1"
+                        class="relative block rounded-lg border shadow-base"
+                      >
+                        <input
+                          type="password"
+                          id="new_password1"
+                          name="new_password1"
+                          class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                          placeholder="کلمه عبور جدید"
+                        />
+
+                        <span
+                          class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                        >
+                          کلمه عبور جدید
+                        </span>
+                      </label>
+                      <div
+                        class="my-2 h-6 text-red-500 dark:text-red-400"
+                      ></div>
+                    </div>
+                    <div>
+                      <div class="mb-4 flex items-center gap-x-2">
+                        <div
+                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"
+                        ></div>
+                        <div
+                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"
+                        ></div>
+                        <div
+                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"
+                        ></div>
+                        <div
+                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"
+                        ></div>
+                      </div>
+                      <div>
+                        <ul
+                          class="select-none list-disc space-y-2 px-4 text-xs text-slate-500 dark:text-slate-400 md:text-sm"
+                        >
+                          <li>
+                            <p>حداقل 6 حرف</p>
+                          </li>
+                          <li>
+                            <p>شامل عدد</p>
+                          </li>
+                          <li>
+                            <p>شامل یک حرف بزرگ</p>
+                          </li>
+                          <li>
+                            <p>شامل یک حرف کوچک</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div>
+                      <label
+                        for="new_password2"
+                        class="relative block rounded-lg border shadow-base"
+                      >
+                        <input
+                          type="password"
+                          id="new_password2"
+                          name="new_password2"
+                          class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                          placeholder="تکرار کلمه عبور جدید"
+                        />
+
+                        <span
+                          class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                        >
+                          تکرار کلمه عبور جدید
+                        </span>
+                      </label>
+                      <div
+                        class="my-2 h-6 text-red-500 dark:text-red-400"
+                      ></div>
+                    </div>
+                  </div>
+              </div>
+              <div class="flex items-center justify-end gap-x-4">
+                <input
+                  class="btn-primary w-full px-4 py-2 xs:w-fit"
+                  type="submit"
+                  value="تغییر کلمه عبور"
+                >
+              </div>
+              </form>
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+{% else %}
+      <div
+        id="password-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-lg">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">تغییر ایمیل</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="password-modal"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close"></use>
+                  </svg>
+
+                  <span class="sr-only">Close Modal</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <form method="post">
+                  {% csrf_token %}
+              <div>
+                  <div class="mb-4">
+                    <div>
+                      <input type="hidden" name="form_type" value="set_password">
+                      <label
+                        for="new_password1"
+                        class="relative block rounded-lg border shadow-base"
+                      >
+                        <input
+                          type="password"
+                          id="new_password1"
+                          name="new_password1"
+                          class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                          placeholder="کلمه عبور جدید"
+                        />
+
+                        <span
+                          class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                        >
+                          کلمه عبور جدید
+                        </span>
+                      </label>
+                      <div
+                        class="my-2 h-6 text-red-500 dark:text-red-400"
+                      ></div>
+                    </div>
+                    <div>
+                      <div class="mb-4 flex items-center gap-x-2">
+                        <div
+                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"
+                        ></div>
+                        <div
+                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"
+                        ></div>
+                        <div
+                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"
+                        ></div>
+                        <div
+                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"
+                        ></div>
+                      </div>
+                      <div>
+                        <ul
+                          class="select-none list-disc space-y-2 px-4 text-xs text-slate-500 dark:text-slate-400 md:text-sm"
+                        >
+                          <li>
+                            <p>حداقل 6 حرف</p>
+                          </li>
+                          <li>
+                            <p>شامل عدد</p>
+                          </li>
+                          <li>
+                            <p>شامل یک حرف بزرگ</p>
+                          </li>
+                          <li>
+                            <p>شامل یک حرف کوچک</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div>
+                      <label
+                        for="new_password2"
+                        class="relative block rounded-lg border shadow-base"
+                      >
+                        <input
+                          type="password"
+                          id="new_password2"
+                          name="new_password2"
+                          class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                          placeholder="تکرار کلمه عبور جدید"
+                        />
+
+                        <span
+                          class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                        >
+                          تکرار کلمه عبور جدید
+                        </span>
+                      </label>
+                      <div
+                        class="my-2 h-6 text-red-500 dark:text-red-400"
+                      ></div>
+                    </div>
+                  </div>
+              </div>
+              <div class="flex items-center justify-end gap-x-4">
+                <input
+                  class="btn-primary w-full px-4 py-2 xs:w-fit"
+                  type="submit"
+                  value="تغییر کلمه عبور"
+                >
+              </div>
+              </form>
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+{% endif %}
+
+<!--      <div-->
+<!--        id="password-modal"-->
+<!--        tabindex="-1"-->
+<!--        aria-hidden="true"-->
+<!--        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"-->
+<!--      >-->
+<!--        <div class="relative max-h-full w-full max-w-lg">-->
+<!--          <div-->
+<!--            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"-->
+<!--          >-->
+<!--            <div class="px-4 py-5 sm:px-6">-->
+<!--              <div class="flex items-center justify-between">-->
+<!--                <h3 class="md:text-lg">تغییر ایمیل</h3>-->
+
+<!--                <button-->
+<!--                  class=" "-->
+<!--                  data-modal-hide="password-modal"-->
+<!--                  type="button"-->
+<!--                >-->
+<!--                  <svg class="h-5 w-5">-->
+<!--                    <use xlink:href="#close"></use>-->
+<!--                  </svg>-->
+
+<!--                  <span class="sr-only">Close Modal</span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="space-y-6 px-4 py-5 sm:p-6">-->
+<!--              <div>-->
+<!--                <form novalidate="">-->
+<!--                  <div class="mb-4">-->
+<!--                    <div>-->
+<!--                      <label-->
+<!--                        for="currentPassword"-->
+<!--                        class="relative block rounded-lg border shadow-base"-->
+<!--                      >-->
+<!--                        <input-->
+<!--                          type="text"-->
+<!--                          id="currentPassword"-->
+<!--                          class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"-->
+<!--                          placeholder="کلمه عبور فعلی"-->
+<!--                        />-->
+
+<!--                        <span-->
+<!--                          class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"-->
+<!--                        >-->
+<!--                          کلمه عبور فعلی-->
+<!--                        </span>-->
+<!--                      </label>-->
+<!--                      <div-->
+<!--                        class="my-2 h-6 text-red-500 dark:text-red-400"-->
+<!--                      ></div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="mb-4">-->
+<!--                    <div>-->
+<!--                      <label-->
+<!--                        for="password"-->
+<!--                        class="relative block rounded-lg border shadow-base"-->
+<!--                      >-->
+<!--                        <input-->
+<!--                          type="text"-->
+<!--                          id="password"-->
+<!--                          class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"-->
+<!--                          placeholder="کلمه عبور جدید"-->
+<!--                        />-->
+
+<!--                        <span-->
+<!--                          class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"-->
+<!--                        >-->
+<!--                          کلمه عبور جدید-->
+<!--                        </span>-->
+<!--                      </label>-->
+<!--                      <div-->
+<!--                        class="my-2 h-6 text-red-500 dark:text-red-400"-->
+<!--                      ></div>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                      <div class="mb-4 flex items-center gap-x-2">-->
+<!--                        <div-->
+<!--                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"-->
+<!--                        ></div>-->
+<!--                        <div-->
+<!--                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"-->
+<!--                        ></div>-->
+<!--                        <div-->
+<!--                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"-->
+<!--                        ></div>-->
+<!--                        <div-->
+<!--                          class="h-[3px] w-full rounded-full bg-background dark:bg-zinc-800"-->
+<!--                        ></div>-->
+<!--                      </div>-->
+<!--                      <div>-->
+<!--                        <ul-->
+<!--                          class="select-none list-disc space-y-2 px-4 text-xs text-slate-500 dark:text-slate-400 md:text-sm"-->
+<!--                        >-->
+<!--                          <li>-->
+<!--                            <p>حداقل 6 حرف</p>-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            <p>شامل عدد</p>-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            <p>شامل یک حرف بزرگ</p>-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            <p>شامل یک حرف کوچک</p>-->
+<!--                          </li>-->
+<!--                        </ul>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="mb-4">-->
+<!--                    <div>-->
+<!--                      <label-->
+<!--                        for="family"-->
+<!--                        class="relative block rounded-lg border shadow-base"-->
+<!--                      >-->
+<!--                        <input-->
+<!--                          type="text"-->
+<!--                          id="family"-->
+<!--                          class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"-->
+<!--                          placeholder="تکرار کلمه عبور جدید"-->
+<!--                        />-->
+
+<!--                        <span-->
+<!--                          class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"-->
+<!--                        >-->
+<!--                          تکرار کلمه عبور جدید-->
+<!--                        </span>-->
+<!--                      </label>-->
+<!--                      <div-->
+<!--                        class="my-2 h-6 text-red-500 dark:text-red-400"-->
+<!--                      ></div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </form>-->
+<!--              </div>-->
+<!--              <div class="flex items-center justify-end gap-x-4">-->
+<!--                <button-->
+<!--                  class="btn-primary w-full px-4 py-2 xs:w-fit"-->
+<!--                  type="button"-->
+<!--                >-->
+<!--                  تغییر کلمه عبور-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+      <!-- birth date modal -->
+      <div
+        id="birthDate-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-md">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">تغییر تاریخ تولد</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="birthDate-modal"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close"></use>
+                  </svg>
+
+                  <span class="sr-only">Close Modal</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <div class="flex items-center justify-between gap-x-6">
+                <div class="w-full">
+                  <label for="year" class="mb-2 block font-medium text-text/90">
+                    سال
+                  </label>
+                  <select
+                    id="year"
+                    class="mb-6 block w-full rounded-lg border bg-muted p-2 text-text/90 outline-none focus:ring-0 dark:placeholder-zinc-400"
+                  >
+                    <option selected>سال</option>
+                    <option value="1380">1380</option>
+                    <option value="1381">1381</option>
+                    <option value="1382">1382</option>
+                    <option value="1383">1383</option>
+                    <option value="1384">1384</option>
+                    <option value="1385">1385</option>
+                  </select>
+                </div>
+                <div class="w-full">
+                  <label for="year" class="mb-2 block font-medium text-text/90">
+                    ماه
+                  </label>
+                  <select
+                    id="year"
+                    class="mb-6 block w-full rounded-lg border bg-muted p-2 text-text/90 outline-none focus:ring-0 dark:placeholder-zinc-400"
+                  >
+                    <option selected>ماه</option>
+                    <option value="shahrivar">شهریور</option>
+                    <option value="azar">آذر</option>
+                    <option value="dey">دی</option>
+                    <option value="khordad">خرداد</option>
+                    <option value="aban">آبان</option>
+                    <option value="mordad">مرداد</option>
+                  </select>
+                </div>
+                <div class="w-full">
+                  <label for="year" class="mb-2 block font-medium text-text/90">
+                    روز
+                  </label>
+                  <select
+                    id="year"
+                    class="mb-6 block w-full rounded-lg border bg-muted p-2 text-text/90 outline-none focus:ring-0 dark:placeholder-zinc-400"
+                  >
+                    <option selected>روز</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                </div>
+              </div>
+              <div class="flex items-center justify-end gap-x-4">
+                <button
+                  class="btn-primary w-full px-4 py-2 xs:w-24"
+                  type="button"
+                >
+                  ویرایش
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

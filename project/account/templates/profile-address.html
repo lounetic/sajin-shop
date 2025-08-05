@@ -1,0 +1,918 @@
+{% extends 'base-sidebar.html'%}
+{% block title %}آدرس ها {% endblock %}
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+{% block content %}
+            <!-- content -->
+            <div class="col-span-12 lg:col-span-9">
+              <div class="rounded-lg bg-muted p-5 shadow-base">
+                <div
+                  class="mb-16 flex flex-col items-center justify-between gap-y-8 xs:flex-row"
+                >
+                  <!-- Title -->
+                  <h1 class="relative w-fit text-xl font-medium">
+                    آدرس های شما
+                    <span
+                      class="absolute right-0 top-10 h-[3px] w-full rounded-full bg-primary"
+                    >
+                    </span>
+                  </h1>
+
+                  <button
+                    data-modal-target="address-add-modal"
+                    data-modal-toggle="address-add-modal"
+                    class="btn-primary w-full px-4 py-2 xs:w-fit"
+                  >
+                    <svg class="h-6 w-6">
+                      <use xlink:href="#address-add"></use>
+                    </svg>
+                    ثبت آدرس جدید
+                  </button>
+                </div>
+                {% for address in addresses %}
+                <div class="space-y-4 divide-y">
+                  <div
+                    class="block rounded-lg border p-4 shadow-base hover:border-border/50 dark:hover:border-white/10"
+                  >
+                    <div
+                      class="mb-4 flex items-center justify-between gap-x-2 sm:mb-2"
+                    >
+                      <p
+                        class="line-clamp-2 h-10 text-sm text-text/90 xs:text-base sm:line-clamp-1 sm:h-6"
+                      >
+                        {{address.address}}
+                      </p>
+
+                      <div class="hidden md:block">
+                        <button
+                          id="dropdownMenuIconButton"
+                          data-dropdown-toggle="address-option-{{address.id}}"
+                          type="button"
+                          class="rounded-full p-1 text-text/90 hover:bg-background hover:"
+                        >
+                          <svg class="h-6 w-6">
+                            <use xlink:href="#vertical-dot" />
+                          </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div
+                          class="z-10 !ml-5 hidden w-50 overflow-hidden rounded-lg border bg-muted"
+                          id="address-option-{{address.id}}"
+                        >
+                          <ul class="space-y-2 p-2">
+                            <li>
+                              <button
+                                type="button"
+                                data-modal-target="address-edit-modal-{{address.id}}"
+                                data-modal-toggle="address-edit-modal-{{address.id}}"
+                                class="flex w-full items-center justify-between rounded-lg px-4 py-3 text-sky-500 hover:bg-sky-500/10 dark:text-sky-400 dark:hover:bg-sky-400/10"
+                              >
+                                <div class="flex items-center gap-x-2">
+                                  <svg class="h-6 w-6">
+                                    <use xlink:href="#address-edit"></use>
+                                  </svg>
+                                  <span> ویرایش </span>
+                                </div>
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                type="button"
+                                data-modal-target="address-delete-modal-{{address.id}}"
+                                data-modal-toggle="address-delete-modal-{{address.id}}"
+                                class="flex w-full items-center justify-between rounded-lg px-4 py-3 text-red-500 hover:bg-warning/10 dark:text-red-400 dark:hover:bg-red-400/10"
+                              >
+                                <div class="flex items-center gap-x-2">
+                                  <svg class="h-6 w-6">
+                                    <use xlink:href="#address-delete"></use>
+                                  </svg>
+                                  <span> حذف </span>
+                                </div>
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-x-2">
+                      <p class="line-clamp-1 text-sm text-text/60">
+                      {{address.recipient_firstname}} {{address.recipient_lastname}}
+                      </p>
+                      <div class="flex items-center gap-x-2 md:hidden">
+                        <button
+                          data-modal-target="address-delete-modal-{{address.id}}"
+                          data-modal-toggle="address-delete-modal-{{address.id}}"
+                          class="btn-red-nobg px-3 py-1 text-sm xs:px-4 xs:py-2"
+                        >
+                          حذف
+                        </button>
+                        <button
+                          data-modal-target="address-edit-modal-{{address.id}}"
+                          data-modal-toggle="address-edit-modal-{{address.id}}"
+                          class="btn-secondary-nobg px-3 py-1 text-sm xs:px-4 xs:py-2"
+                        >
+                          ویرایش
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <button
+                  data-modal-target="address-add-modal"
+                  data-modal-toggle="address-add-modal"
+                  class="w-full"
+                >
+                  <div
+                    class="not-prose relative mt-6 flex rounded-md border bg-muted transition-all duration-150 hover: bg-background hover:dark:bg-zinc-800"
+                  >
+                    <div
+                      class="relative flex h-25 w-full select-none items-center justify-center overflow-hidden rounded opacity-75"
+                    >
+                      <svg
+                        class="absolute inset-0 h-full w-full stroke-zinc-900/10 dark:stroke-white/10"
+                        fill="none"
+                      >
+                        <defs>
+                          <pattern
+                            id="pattern-5c1e4f0e-62d5-498b-8ff0-cf77bb448c8e"
+                            x="0"
+                            y="0"
+                            width="10"
+                            height="10"
+                            patternUnits="userSpaceOnUse"
+                          >
+                            <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3"></path>
+                          </pattern>
+                        </defs>
+                        <rect
+                          stroke="none"
+                          fill="url(#pattern-5c1e4f0e-62d5-498b-8ff0-cf77bb448c8e)"
+                          width="100%"
+                          height="100%"
+                        ></rect>
+                      </svg>
+                      <svg class="h-8 w-8 text-primary">
+                        <use xlink:href="#address-add" />
+                      </svg>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+      <!-- Mobile Profile Menu Drawer -->
+      <div
+        aria-labelledby="profile-menu-drawer-navigation-label"
+        class="fixed bottom-0 left-0 right-0 z-40 w-full translate-y-full rounded-t-3xl bg-muted transition-transform duration-300"
+        id="profile-menu-drawer-navigation"
+        tabindex="-1"
+      >
+        <div
+          class="flex items-center justify-between gap-x-4 border-b p-4 pb-5"
+        >
+          <h5 class="text-lg text-text/90">منوی پنل کاربری</h5>
+          <button
+            aria-controls="user-account-drawer-navigation"
+            class="inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-text/90 hover:bg-zinc-100 hover:text-gray-900 dark:hover:bg-black dark:hover:text-white"
+            data-drawer-hide="profile-menu-drawer-navigation"
+            type="button"
+          >
+            <svg class="h-5 w-5">
+              <use xlink:href="#close" />
+            </svg>
+
+            <span class="sr-only">Close menu</span>
+          </button>
+        </div>
+        <div class="p-4">
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="./profile-dashboard.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#home" />
+                  </svg>
+                  <div>پیشخوان</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-orders.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#order" />
+                  </svg>
+                  <div>سفارش ها</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-favorite.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#heart" />
+                  </svg>
+                  <div>علاقه‌مندی ها</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-recent.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#recent" />
+                  </svg>
+                  <div>بازدید های اخیر</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-notification.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#notification" />
+                  </svg>
+                  <div>پیام ها</div>
+                </div>
+                <div
+                  class="flex h-6 w-6 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white dark:bg-emerald-600"
+                >
+                  10
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-address.html"
+                class="profile-menu profile-menu-active flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#address" />
+                  </svg>
+                  <div>آدرس ها</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-edit.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#user-setting" />
+                  </svg>
+                  <div>اطلاعات حساب کاربری</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                class="flex items-center justify-between rounded-lg p-4 text-red-500 hover:bg-warning/10 dark:text-red-400 dark:hover:bg-red-400/10"
+                href="#"
+              >
+                <div class="flex items-center gap-x-2">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#exit"></use>
+                  </svg>
+                  <span> خروج </span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <form method="post" id="add-address-form">
+        {% csrf_token %}
+        <input type="hidden" name="add_address">
+      <!-- Address Add modal -->
+      <div
+        id="address-add-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-2xl">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">ثبت آدرس جدید</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="address-add-modal"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close" />
+                  </svg>
+
+                  <span class="sr-only">Close menu</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <div class="grid grid-cols-2 gap-x-4 gap-y-5 sm:gap-6">
+                <!-- Receiver name -->
+                <div class="col-span-2 sm:col-span-1">
+                  <label
+                    for="name"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="name"
+                      name="recipient_firstname"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="نام گیرنده"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      نام گیرنده
+                    </span>
+                  </label>
+
+                </div>
+                <!-- Receiver family -->
+                <div class="col-span-2 sm:col-span-1">
+                  <label
+                    for="family"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="family"
+                      name="recipient_lastname"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="نام خانوادگی گیرنده"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      نام خانوادگی گیرنده
+                    </span>
+                  </label>
+                </div>
+                <!-- Receiver Phone number -->
+                <div class="col-span-2 sm:col-span-1">
+                  <label
+                    for="phoneNumber"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="phoneNumber"
+                      name="recipient_phone"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="شماره تماس گیرنده"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      شماره تماس گیرنده
+                    </span>
+                  </label>
+                </div>
+                <!-- Receiver National Code -->
+<!--                <div class="col-span-2 sm:col-span-1">-->
+<!--                  <label-->
+<!--                    for="nationalCode"-->
+<!--                    class="relative block rounded-lg border shadow-base"-->
+<!--                  >-->
+<!--                    <input-->
+<!--                      type="text"-->
+<!--                      id="nationalCode"-->
+<!--                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"-->
+<!--                      placeholder="کد ملی گیرنده"-->
+<!--                    />-->
+
+<!--                    <span-->
+<!--                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"-->
+<!--                    >-->
+<!--                      کد ملی گیرنده-->
+<!--                    </span>-->
+<!--                  </label>-->
+<!--                </div>-->
+
+                <!-- Receiver Address -->
+                <div class="col-span-2">
+                  <label
+                    for="address"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <textarea
+                      type="text"
+                      id="address"
+                      name="address"
+                      rows="3"
+                      class="main-scroll peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="نشانی گیرنده"
+                    ></textarea>
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-6 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      نشانی گیرنده
+                    </span>
+                  </label>
+                </div>
+                <!-- Receiver Province -->
+                <div class="col-span-2 sm:col-span-1">
+                 <div class="relative block rounded-lg border shadow-base">
+                  <select
+                    id="province-add"
+                    name="province"
+                    class="block w-full rounded-lg border bg-muted px-4 py-3 placeholder-transparent text-sm outline-none focus:border-emerald-500 focus:ring-emerald-500 dark:placeholder-zinc-400 dark:focus:border-emerald-500 dark:focus:ring-emerald-500">
+                    <option selected>استان</option>
+                    {% for item in provinces %}
+                      <option value="{{item.id}}">{{item.title}}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+                </div>
+                <!-- Receiver City -->
+
+                <div class="col-span-2 sm:col-span-1">
+                 <div class="relative block rounded-lg border shadow-base">
+                  <select
+                    name="city"
+                    id="city-add"
+                    class="block w-full rounded-lg border bg-muted px-4 py-3 placeholder-transparent text-sm outline-none focus:border-emerald-500 focus:ring-emerald-500 dark:placeholder-zinc-400 dark:focus:border-emerald-500 dark:focus:ring-emerald-500">
+                    <option selected>شهر</option>
+                  </select>
+                </div>
+                </div>
+                <!-- Receiver Building Info -->
+                <div
+                  class="col-span-2 flex w-full items-center gap-x-4 gap-y-5 sm:col-span-1 sm:gap-6"
+                >
+                  <label
+                    for="buildingNumber"
+                    class="relative block w-full rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="buildingNumber"
+                      name="number"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="پلاک"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      پلاک
+                    </span>
+                  </label>
+                  <label
+                    for="buildingUnit"
+                    class="relative block w-full rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="buildingUnit"
+                      name="unit"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="واحد"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      واحد
+                    </span>
+                  </label>
+                </div>
+                <!-- Receiver Postal Code -->
+                <div class="col-span-2 sm:col-span-1">
+                  <label
+                    for="postalCode"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="postalCode"
+                      name="postal_code"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="کد پستی"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      کد پستی
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="flex justify-end">
+                <button type="submit" class="btn-primary w-full px-4 py-2 md:w-auto">
+                  <span>
+                    <svg class="h-5 w-5">
+                      <use xlink:href="#address-add" />
+                    </svg>
+                  </span>
+                  <span> ثبت آدرس جدید </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
+      <!-- Address Edit modal -->
+      {% for address in addresses %}
+      <!-- Address Delete modal -->
+      <div
+        id="address-delete-modal-{{ address.id }}"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-md">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">حذف آدرس</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="address-delete-modal-{{ address.id }}"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close"></use>
+                  </svg>
+
+                  <span class="sr-only">Close Modal</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <p class="text-text/90">آیا از حذف این آدرس اطمینان دارید؟</p>
+              <div class="flex items-center justify-end gap-x-4">
+                <button
+                  class="btn-secondary px-4 py-2 text-sm"
+                  data-modal-hide="address-delete-modal-{{ address.id }}"
+                  type="button"
+                  onclick="document.getElementById('address-delete-modal-{{ address.id }}').classList.add('hidden')"
+
+                >
+                  انصراف
+                </button>
+                <form method="POST" action="{% url 'account:delete_address' address.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-red px-4 py-2 text-sm">
+                  حذف آدرس
+                </button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<form action="{% url 'account:edit-address' address.id %}" method="post"
+id="update-address-form">
+  {% csrf_token %}
+      <div
+        id="address-edit-modal-{{address.id}}"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-2xl">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">ویرایش آدرس</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="address-edit-modal-{{address.id}}"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close" />
+                  </svg>
+
+                  <span class="sr-only">Close menu</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <div class="grid grid-cols-2 gap-x-4 gap-y-5 sm:gap-6">
+                <!-- Receiver name -->
+                <div class="col-span-2 sm:col-span-1">
+                  <label
+                    for="name"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="name"
+                      name="recipient_firstname"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      value="{{address.recipient_firstname}}"
+                      placeholder="نام گیرنده"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      نام گیرنده
+                    </span>
+                  </label>
+                </div>
+                <!-- Receiver family -->
+                <div class="col-span-2 sm:col-span-1">
+                  <label
+                    for="family"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="family"
+                      name="recipient_lastname"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      value="{{address.recipient_lastname}}"
+                      placeholder="نام خانوادگی گیرنده"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      نام خانوادگی گیرنده
+                    </span>
+                  </label>
+                </div>
+                <!-- Receiver Phone number -->
+                <div class="col-span-2 sm:col-span-1">
+                  <label
+                    for="phoneNumber"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="phoneNumber"
+                      name="recipient_phone"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      value="{{address.recipient_phone}}"
+                      placeholder="شماره تماس گیرنده"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      شماره تماس گیرنده
+                    </span>
+                  </label>
+                </div>
+                <!-- Receiver National Code -->
+<!--                <div class="col-span-2 sm:col-span-1">-->
+<!--                  <label-->
+<!--                    for="nationalCode"-->
+<!--                    class="relative block rounded-lg border shadow-base"-->
+<!--                  >-->
+<!--                    <input-->
+<!--                      type="text"-->
+<!--                      id="nationalCode"-->
+<!--                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"-->
+<!--                      value="1666666666"-->
+<!--                      placeholder="کد ملی گیرنده"-->
+<!--                    />-->
+
+<!--                    <span-->
+<!--                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"-->
+<!--                    >-->
+<!--                      کد ملی گیرنده-->
+<!--                    </span>-->
+<!--                  </label>-->
+<!--                </div>-->
+
+                <!-- Receiver Address -->
+                <div class="col-span-2">
+                  <label
+                    for="address"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <textarea
+                      type="text"
+                      id="address"
+                      name="address"
+                      rows="3"
+                      class="main-scroll peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      placeholder="نشانی گیرنده"
+                    >
+  {{address.address}}</textarea
+                    >
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-6 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      نشانی گیرنده
+                    </span>
+                  </label>
+                </div>
+                <!-- Receiver Province -->
+                <div class="col-span-2 sm:col-span-1">
+                 <div class="relative block rounded-lg border shadow-base">
+                  <select
+                    id="province-{{ address.id }}"
+                    name="province"
+                    class="block w-full rounded-lg border bg-muted px-4 py-3 placeholder-transparent text-sm outline-none focus:border-emerald-500 focus:ring-emerald-500 dark:placeholder-zinc-400 dark:focus:border-emerald-500 dark:focus:ring-emerald-500">
+                    {% for item in provinces %}
+                    <option value="{{ item.id }}" {% if item.id == address.city.province.id  %} selected {% endif %}>
+                     {{ item.title }}
+                    </option>
+  {% endfor %}
+                  </select>
+                </div>
+                </div>
+                <!-- Receiver City -->
+
+                <div class="col-span-2 sm:col-span-1">
+                 <div class="relative block rounded-lg border shadow-base">
+                  <select
+                    name="city"
+                    id="city-{{ address.id }}"
+                    class="block w-full rounded-lg border bg-muted px-4 py-3 placeholder-transparent text-sm outline-none focus:border-emerald-500 focus:ring-emerald-500 dark:placeholder-zinc-400 dark:focus:border-emerald-500 dark:focus:ring-emerald-500">
+                      {% if address.city %}
+                    <option value="{{ address.city.id }}" selected>{{ address.city.title }}</option>
+                  {% else %}
+                    <option value="">شهر</option>
+                  {% endif %}
+                  </select>
+                </div>
+                </div>
+                <!-- Receiver Building Info -->
+                <div
+                  class="col-span-2 flex w-full items-center gap-x-4 gap-y-5 sm:col-span-1 sm:gap-6"
+                >
+                  <label
+                    for="buildingNumber"
+                    class="relative block w-full rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      name="number"
+                      id="buildingNumber"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      value="{{address.number}}"
+                      placeholder="پلاک"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      پلاک
+                    </span>
+                  </label>
+                  <label
+                    for="buildingUnit"
+                    class="relative block w-full rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="buildingUnit"
+                      name="unit"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      value="{{address.unit}}"
+                      placeholder="واحد"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      واحد
+                    </span>
+                  </label>
+                </div>
+                <!-- Receiver Postal Code -->
+                <div class="col-span-2 sm:col-span-1">
+                  <label
+                    for="postalCode"
+                    class="relative block rounded-lg border shadow-base"
+                  >
+                    <input
+                      type="text"
+                      id="postalCode"
+                      name="postal_code"
+                      class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 placeholder-transparent focus:outline-none focus:ring-0"
+                      value="{{address.postal_code}}"
+                      placeholder="کد پستی"
+                    />
+
+                    <span
+                      class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-muted px-2 py-0.5 text-sm text-text/60 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm"
+                    >
+                      کد پستی
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="flex justify-end">
+                <button class="btn-primary w-full px-4 py-2 md:w-auto">
+                  <span>
+                    <svg class="h-5 w-5">
+                      <use xlink:href="#address-edit" />
+                    </svg>
+                  </span>
+                  <span> ویرایش آدرس </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</form>
+      {% endfor %}
+
+
+<script>
+$(document).ready(function () {
+  // Handle the province select change for Add Address modal
+  $("#province-add").on("change", function () {
+    const provinceId = $(this).val();
+    const citySelect = $("#city-add");
+    citySelect.empty().append('<option value="">شهر</option>');
+
+    if (provinceId) {
+      $.ajax({
+        url: '{% url "account:get_citys" %}',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          "province_id": provinceId
+        },
+        success: function (data) {
+          $.map(data, function (item) {
+            citySelect.append('<option value="' + item.id + '">' + item.title + '</option>');
+          });
+        }
+      });
+    }
+  });
+
+  // Handle the province select change for Update Address modals
+  $("[id^='province-']").each(function () {
+    const provinceSelect = $(this);
+    const addressId = provinceSelect.attr('id').split('-')[1];
+    const citySelect = $("#city-" + addressId);
+
+    provinceSelect.on("change", function () {
+      const provinceId = $(this).val();
+      citySelect.empty().append('<option value="">شهر</option>');
+
+      if (provinceId) {
+        $.ajax({
+          url: '{% url "account:get_citys" %}',
+          type: 'GET',
+          dataType: 'json',
+          data: {
+            "province_id": provinceId
+          },
+          success: function (data) {
+            $.map(data, function (item) {
+              citySelect.append('<option value="' + item.id + '">' + item.title + '</option>');
+            });
+          }
+        });
+      }
+    });
+  });
+});
+
+
+</script>
+{% endblock %}

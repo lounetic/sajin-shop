@@ -1,0 +1,409 @@
+{% extends 'base-footer.html' %} {% load static %}
+{% block title %} صفحه اصلی {% endblock %}
+{% block body %}
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<!-- Color Effect -->
+      <div
+        class="fixed inset-x-0 top-1/3 mx-auto h-1/3 w-1/4 bg-primary/50 blur-[200px]"
+      ></div>
+      <main class="flex-grow bg-background pb-14 pt-36 xs:pt-36">
+        <!-- Main Banners section Start -->
+        <section class="mb-8">
+          <div class="container relative grid grid-cols-12 gap-x-4 gap-y-2">
+            <div class="col-span-12 lg:col-span-8">
+              <!-- Swiper -->
+              <div class="swiper banner-slider rounded-lg shadow-base">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a href="#">
+                      <img
+                        alt=""
+                        class="max-h-[450px]"
+                        src="{% static 'images/banners/main-slider-1.jpg' %}"
+                      />
+                    </a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a href="#">
+                      <img
+                        alt=""
+                        class="max-h-[450px]"
+                        src="{% static 'images/banners/main-slider-2.jpg' %}"
+                      />
+                    </a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a href="#">
+                      <img
+                        alt=""
+                        class="max-h-[450px]"
+                        src="{% static 'images/banners/main-slider-3.jpg' %}"
+                      />
+                    </a>
+                  </div>
+                </div>
+                <div class="swiper-button-next hidden md:flex"></div>
+                <div class="swiper-button-prev hidden md:flex"></div>
+                <div class="swiper-pagination main-banner-pagination"></div>
+              </div>
+            </div>
+            <div class="col-span-12 hidden xs:block lg:col-span-4">
+              <div
+                class="flex h-full flex-row justify-between gap-x-2 lg:flex-col"
+              >
+                <div>
+                  <a href="#">
+                    <img
+                      alt=""
+                      class="rounded-lg shadow-base"
+                      src="{% static 'images/banners/main-banner-top.jpg' %}"
+                    />
+                  </a>
+                </div>
+
+                <div>
+                  <a href="#">
+                    <img
+                      alt=""
+                      class="rounded-lg shadow-base"
+                      src="{% static 'images/banners/main-bot.jpg' %}"
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Main Banners section End -->
+
+        <!-- Newest Products section Start -->
+        <section class="mb-8">
+          <div class="container relative">
+            <!-- Section Header -->
+            <div class="mb-4 flex items-center justify-between">
+              <h3 class="font-medium md:text-lg lg:text-xl">
+                محصولات
+              </h3>
+              <a
+                class="flex items-center gap-x-2 py-2 text-sm text-primary lg:text-base"
+                href="{% url 'tests:store' %}"
+              >
+                مشاهده همه
+                <span>
+                  <svg class="h-5 w-5 lg:h-6 lg:w-6">
+                    <use xlink:href="#chevron-left" />
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <!-- Section Content -->
+
+            <div class="swiper product-slider p-px">
+              <div class="swiper-wrapper">
+                {% for product in products %}
+                <div class="swiper-slide">
+                  <div
+                    class="border-gradient group relative rounded-base p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-base"
+                  >
+                    <!-- Product Card -->
+                    <div
+                      class="relative rounded-xl bg-muted p-2 shadow-base md:p-5"
+                    >
+                      <!-- image -->
+                      <div class="mb-2 md:mb-5" draggable="false">
+                        <a href="{% url 'tests:productdetail' id=product.id %}">
+                          <img
+                            alt=""
+                            class="mx-auto w-32 rounded-lg md:w-auto"
+                            src="{{product.main_image.url}}"
+                          />
+                        </a>
+                      </div>
+                      <!-- title -->
+                      <div class="mb-2">
+                        <a
+                          class="line-clamp-2 h-10 text-sm md:h-12 md:text-base"
+                          href="./product-detail.html"
+                        >
+                          {{product.title}}
+                        </a>
+                      </div>
+                      <!-- Prices -->
+                      <div class="flex flex-col">
+                        <!-- Old price -->
+                        <div class="h-5 text-left"></div>
+                        <div class="flex items-center justify-between">
+                          <div></div>
+                          <!-- New price -->
+                          <div
+                            class="text-sm font-bold text-primary md:text-base"
+                          >
+                            {{product.price}}
+                            <span class="text-xs font-light md:text-sm"
+                              >تومان</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+            </div>
+          </div>
+        </section>
+        <!-- Newest Products section End -->
+
+        <!-- Category Banners section Start -->
+<!--        <section class="mb-8">-->
+<!--          <div class="container relative">-->
+<!--            <div class="flex w-full flex-col justify-between gap-4 md:flex-row">-->
+<!--              <a href="#">-->
+<!--                <img-->
+<!--                  alt=""-->
+<!--                  class="rounded-base"-->
+<!--                  src="{% static 'images/banners/category-right.jpg' %}"-->
+<!--                />-->
+<!--              </a>-->
+<!--              <a href="#">-->
+<!--                <img-->
+<!--                  alt=""-->
+<!--                  class="rounded-base"-->
+<!--                  src="{% static 'images/banners/category-left.jpg' %}"-->
+<!--                />-->
+<!--              </a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </section>-->
+        <!-- Category Banners section End -->
+
+        <!-- Category section Start -->
+        <section class="mb-8">
+          <div class="container relative">
+            <div
+              class="flex flex-wrap items-center justify-center gap-8 lg:justify-between"
+            >
+              <!-- Category -->
+              <a
+                class="relative flex w-25 flex-col items-center justify-between gap-y-1.5 sm:w-auto sm:gap-y-2.5"
+                href="{% url 'tests:store'%}"
+              >
+                <div
+                  class="border-gradient group relative rounded-full p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-full"
+                >
+                  <img
+                    alt=""
+                    class="relative h-25 w-25 rounded-full"
+                    src="{% static 'images/IMG_3599.PNG' %}"
+                  />
+                </div>
+                <p class="line-clamp-2 h-10 text-center text-sm sm:text-base">
+                  همه محصولات
+                </p>
+              </a>
+              {% for item in category_data %}
+              <a
+                class="relative flex w-25 flex-col items-center justify-between gap-y-1.5 sm:w-auto sm:gap-y-2.5"
+                href="{% url 'tests:category_store' slug=item.category.slug %}"
+              >
+                <div
+                  class="border-gradient group relative rounded-full p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-full"
+                >
+                  <img
+                    alt=""
+                    class="relative h-25 w-25 rounded-full"
+                    src="{{ item.image }}"
+                  />
+                </div>
+                <p class="line-clamp-2 h-10 text-center text-sm sm:text-base">
+                  {{ item.category.title }}
+                </p>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+        <!-- Category section End -->
+
+        <!-- Blog section Start -->
+<!--        <section class="mb-6">-->
+<!--          <div class="container relative">-->
+<!--            &lt;!&ndash; Section Header &ndash;&gt;-->
+<!--            <div class="mb-4 flex items-center justify-between">-->
+<!--              <h3 class="font-medium md:text-lg lg:text-xl">مطالب خواندنی</h3>-->
+<!--              <a-->
+<!--                class="flex items-center gap-x-2 py-2 text-sm text-primary lg:text-base"-->
+<!--                href="./blog.html"-->
+<!--              >-->
+<!--                مشاهده همه-->
+<!--                <span>-->
+<!--                  <svg class="h-5 w-5 lg:h-6 lg:w-6">-->
+<!--                    <use xlink:href="#chevron-left" />-->
+<!--                  </svg>-->
+<!--                </span>-->
+<!--              </a>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Section Content &ndash;&gt;-->
+<!--            <div class="swiper blog-slider p-px">-->
+<!--              <div class="swiper-wrapper">-->
+<!--                <div class="swiper-slide">-->
+<!--                  <div-->
+<!--                    class="border-gradient group relative rounded-base p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-base"-->
+<!--                  >-->
+<!--                    &lt;!&ndash; Blog Card &ndash;&gt;-->
+<!--                    <div>-->
+<!--                      <a href="./blog-detail.html">-->
+<!--                        <div-->
+<!--                          class="relative rounded-xl bg-muted p-2 shadow-base"-->
+<!--                        >-->
+<!--                          &lt;!&ndash; image &ndash;&gt;-->
+<!--                          <div class="mb-2 md:mb-5" draggable="false">-->
+<!--                            <img-->
+<!--                              alt="blog"-->
+<!--                              class="mx-auto w-auto rounded-lg rounded-bl-3xl"-->
+<!--                              src="{% static 'images/blog/blog1.jpg' %}"-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          &lt;!&ndash; title &ndash;&gt;-->
+<!--                          <div class="mb-2">-->
+<!--                            <p-->
+<!--                              class="line-clamp-2 h-10 text-sm md:h-12 md:text-base"-->
+<!--                            >-->
+<!--                              مزایا و معایب گوشی‌های سری گلکسی S21-->
+<!--                            </p>-->
+<!--                          </div>-->
+<!--                          <div class="flex justify-end">-->
+<!--                            <p class="text-xs text-primary xs:text-sm">-->
+<!--                              29 / شهریور / 1403-->
+<!--                            </p>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="swiper-slide">-->
+<!--                  <div-->
+<!--                    class="border-gradient group relative rounded-base p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-base"-->
+<!--                  >-->
+<!--                    &lt;!&ndash; Blog Card &ndash;&gt;-->
+<!--                    <div>-->
+<!--                      <a href="./blog-detail.html">-->
+<!--                        <div-->
+<!--                          class="relative rounded-xl bg-muted p-2 shadow-base"-->
+<!--                        >-->
+<!--                          &lt;!&ndash; image &ndash;&gt;-->
+<!--                          <div class="mb-2 md:mb-5" draggable="false">-->
+<!--                            <img-->
+<!--                              alt="blog"-->
+<!--                              class="mx-auto w-auto rounded-lg rounded-bl-3xl"-->
+<!--                              src="{% static 'images/blog/blog1.jpg' %}"-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          &lt;!&ndash; title &ndash;&gt;-->
+<!--                          <div class="mb-2">-->
+<!--                            <p-->
+<!--                              class="line-clamp-2 h-10 text-sm md:h-12 md:text-base"-->
+<!--                            >-->
+<!--                              مزایا و معایب گوشی‌های سری گلکسی S21-->
+<!--                            </p>-->
+<!--                          </div>-->
+<!--                          <div class="flex justify-end">-->
+<!--                            <p class="text-xs text-primary xs:text-sm">-->
+<!--                              29 / شهریور / 1403-->
+<!--                            </p>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="swiper-slide">-->
+<!--                  <div-->
+<!--                    class="border-gradient group relative rounded-base p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-base"-->
+<!--                  >-->
+<!--                    &lt;!&ndash; Blog Card &ndash;&gt;-->
+<!--                    <div>-->
+<!--                      <a href="./blog-detail.html">-->
+<!--                        <div-->
+<!--                          class="relative rounded-xl bg-muted p-2 shadow-base"-->
+<!--                        >-->
+<!--                          &lt;!&ndash; image &ndash;&gt;-->
+<!--                          <div class="mb-2 md:mb-5" draggable="false">-->
+<!--                            <img-->
+<!--                              alt="blog"-->
+<!--                              class="mx-auto w-auto rounded-lg rounded-bl-3xl"-->
+<!--                              src="{% static 'images/blog/blog1.jpg' %}"-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          &lt;!&ndash; title &ndash;&gt;-->
+<!--                          <div class="mb-2">-->
+<!--                            <p-->
+<!--                              class="line-clamp-2 h-10 text-sm md:h-12 md:text-base"-->
+<!--                            >-->
+<!--                              مزایا و معایب گوشی‌های سری گلکسی S21-->
+<!--                            </p>-->
+<!--                          </div>-->
+<!--                          <div class="flex justify-end">-->
+<!--                            <p class="text-xs text-primary xs:text-sm">-->
+<!--                              29 / شهریور / 1403-->
+<!--                            </p>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="swiper-slide">-->
+<!--                  <div-->
+<!--                    class="border-gradient group relative rounded-base p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-base"-->
+<!--                  >-->
+<!--                    &lt;!&ndash; Blog Card &ndash;&gt;-->
+<!--                    <div>-->
+<!--                      <a href="./blog-detail.html">-->
+<!--                        <div-->
+<!--                          class="relative rounded-xl bg-muted p-2 shadow-base"-->
+<!--                        >-->
+<!--                          &lt;!&ndash; image &ndash;&gt;-->
+<!--                          <div class="mb-2 md:mb-5" draggable="false">-->
+<!--                            <img-->
+<!--                              alt="blog"-->
+<!--                              class="mx-auto w-auto rounded-lg rounded-bl-3xl"-->
+<!--                              src="{% static 'images/blog/blog1.jpg' %}"-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          &lt;!&ndash; title &ndash;&gt;-->
+<!--                          <div class="mb-2">-->
+<!--                            <p-->
+<!--                              class="line-clamp-2 h-10 text-sm md:h-12 md:text-base"-->
+<!--                            >-->
+<!--                              مزایا و معایب گوشی‌های سری گلکسی S21-->
+<!--                            </p>-->
+<!--                          </div>-->
+<!--                          <div class="flex justify-end">-->
+<!--                            <p class="text-xs text-primary xs:text-sm">-->
+<!--                              29 / شهریور / 1403-->
+<!--                            </p>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="swiper-button-next"></div>-->
+<!--              <div class="swiper-button-prev"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </section>-->
+
+        <!-- Blog section End -->
+      </main>
+ </div>
+
+{% endblock %}

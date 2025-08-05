@@ -1,0 +1,395 @@
+{% extends 'base-sidebar.html' %}
+{% load static %}
+{% block title %} داشبورد {% endblock %}
+{% block content %}
+            <div class="col-span-12 lg:col-span-9">
+              <div class="rounded-lg bg-muted p-5 shadow-base">
+                <!-- Title -->
+                <h1 class="relative mb-16 w-fit text-xl font-medium">
+                  پیشخوان
+                  <span
+                    class="absolute right-0 top-10 h-[3px] w-full rounded-full bg-primary"
+                  >
+                  </span>
+                </h1>
+                <div class="mb-8">
+                  <h2
+                    class="mb-8 flex items-center gap-x-4 text-lg text-text/90"
+                  >
+                    <span class="h-2 w-2 rounded-full bg-primary"></span>
+                    حساب کاربری
+                  </h2>
+                  <div class="grid grid-cols-2 gap-4 md:gap-6 xl:grid-cols-4">
+                    <a
+                      href="{% url 'account:profile-edit' %}"
+                      class="flex flex-col items-center gap-4 rounded-base bg-sky-500 p-2 dark:bg-sky-600 md:flex-row"
+                    >
+                      <div
+                        class="relative rounded-base bg-sky-600/50 p-2 dark:bg-sky-500/50"
+                      >
+                        <svg class="h-8 w-8 text-white">
+                          <use xlink:href="#user-setting" />
+                        </svg>
+                      </div>
+
+                      <div class="text-sm font-medium text-white md:text-base">
+                        تکمیل مشخصات
+                      </div>
+                    </a>
+                    <a
+                      href="{% url 'account:profile-edit' %}"
+                      class="flex flex-col items-center gap-4 rounded-base bg-warning p-2 dark:bg-red-600 md:flex-row"
+                    >
+                      <div class="relative rounded-base bg-red-600/50 p-2 /50">
+                        <svg class="h-8 w-8 text-white">
+                          <use xlink:href="#password-lock" />
+                        </svg>
+                      </div>
+
+                      <div class="text-sm font-medium text-white md:text-base">
+                        ثبت کلمه عبور
+                      </div>
+                    </a>
+<!--                    <a-->
+<!--                      href="./profile-favorite.html"-->
+<!--                      class="flex flex-col items-center gap-4 rounded-base bg-rose-500 p-2 dark:bg-rose-600 md:flex-row"-->
+<!--                    >-->
+<!--                      <div-->
+<!--                        class="relative rounded-base bg-rose-600/50 p-2 dark:bg-rose-500/50"-->
+<!--                      >-->
+<!--                        <svg class="h-8 w-8 text-white">-->
+<!--                          <use xlink:href="#heart" />-->
+<!--                        </svg>-->
+<!--                        <span-->
+<!--                          class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-rose-600 text-sm font-medium text-white dark:bg-rose-500 md:hidden"-->
+<!--                        >-->
+<!--                          6-->
+<!--                        </span>-->
+<!--                      </div>-->
+
+<!--                      <div-->
+<!--                        class="flex items-center gap-x-2 text-sm font-medium text-white md:text-base"-->
+<!--                      >-->
+<!--                        <span class="hidden md:block">5</span> علاقه مندی-->
+<!--                      </div>-->
+<!--                    </a>-->
+<!--                    <a-->
+<!--                      href="./profile-notification.html"-->
+<!--                      class="flex flex-col items-center gap-4 rounded-base bg-primary p-2 dark:bg-emerald-600 md:flex-row"-->
+<!--                    >-->
+<!--                      <div-->
+<!--                        class="relative rounded-base bg-yellow-600/50 p-2 dark:bg-primary/50"-->
+<!--                      >-->
+<!--                        <svg class="h-8 w-8 text-white">-->
+<!--                          <use xlink:href="#notification" />-->
+<!--                        </svg>-->
+<!--                        <span-->
+<!--                          class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-600 text-sm font-medium text-white dark:bg-primary md:hidden"-->
+<!--                        >-->
+<!--                          6-->
+<!--                        </span>-->
+<!--                      </div>-->
+
+<!--                      <div-->
+<!--                        class="flex items-center gap-x-2 text-sm font-medium text-white md:text-base"-->
+<!--                      >-->
+<!--                        <span class="hidden md:block">5</span> اعلان جدید-->
+<!--                      </div>-->
+<!--                    </a>-->
+                  </div>
+                </div>
+
+                <div class="mb-8">
+                  <div
+                    class="mb-8 flex flex-wrap items-center justify-between gap-4"
+                  >
+                    <h3 class="flex items-center gap-x-4 text-lg text-text/90">
+                      <span class="h-2 w-2 rounded-full bg-primary"></span>
+                      وضعیت سفارش های شما
+                    </h3>
+                    <a
+                      class="btn-primary-nobg text-base"
+                      href="{% url 'account:profile-orders' %}"
+                    >
+                      مشاهده همه
+                      <span>
+                        <svg class="h-5 w-5 lg:h-6 lg:w-6">
+                          <use xlink:href="#chevron-left"></use>
+                        </svg>
+                      </span>
+                    </a>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-4 md:gap-6 xl:grid-cols-4">
+                    <div
+                      class="flex flex-col items-center gap-4 rounded-base bg-sky-500 p-2 dark:bg-sky-600 md:flex-row"
+                    >
+                      <div
+                        class="relative rounded-base bg-sky-600/50 p-2 dark:bg-sky-500/50"
+                      >
+                        <svg class="h-10 w-10 text-white">
+                          <use xlink:href="#order-current" />
+                        </svg>
+                        <span
+                          class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-sky-600 text-sm font-medium text-white dark:bg-sky-500 md:hidden"
+                        >
+                          6
+                        </span>
+                      </div>
+                      <div class="flex flex-col gap-y-1">
+                        <div class="hidden font-medium text-white md:block">
+                          0 سفارش
+                        </div>
+                        <div class="text-white">فعلی</div>
+                      </div>
+                    </div>
+
+                    <!-- item -->
+                    <div
+                      class="flex flex-col items-center gap-4 rounded-base bg-primary p-2 dark:bg-emerald-600 md:flex-row"
+                    >
+                      <div
+                        class="relative rounded-base bg-yellow-600/50 p-2 dark:bg-primary/50"
+                      >
+                        <svg class="h-10 w-10 text-white">
+                          <use xlink:href="#order-delivered" />
+                        </svg>
+                        <span
+                          class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-600 text-sm font-medium text-white dark:bg-primary md:hidden"
+                        >
+                          10
+                        </span>
+                      </div>
+                      <div class="flex flex-col gap-y-1">
+                        <div class="hidden font-medium text-white md:block">
+                          0 سفارش
+                        </div>
+                        <div class="text-white">تحویل شده</div>
+                      </div>
+                    </div>
+
+                    <!-- item -->
+                    <div
+                      class="flex flex-col items-center gap-4 rounded-base bg-warning p-2 dark:bg-red-400 md:flex-row"
+                    >
+                      <div class="relative rounded-base bg-red-400/50 p-2 /50">
+                        <svg class="h-10 w-10 text-white">
+                          <use xlink:href="#order-canceled" />
+                        </svg>
+                        <span
+                          class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-red-400 text-sm font-medium text-white md:hidden"
+                        >
+                          3
+                        </span>
+                      </div>
+                      <div class="flex flex-col gap-y-1">
+                        <div class="hidden font-medium text-white md:block">
+                          0 سفارش
+                        </div>
+                        <div class="text-white">لغو شده</div>
+                      </div>
+                    </div>
+
+                    <!-- item -->
+                    <div
+                      class="flex flex-col items-center gap-4 rounded-base bg-yellow-500 p-2 dark:bg-yellow-600 md:flex-row"
+                    >
+                      <div
+                        class="relative rounded-base bg-yellow-600/50 p-2 dark:bg-yellow-500/50"
+                      >
+                        <svg class="h-10 w-10 text-white">
+                          <use xlink:href="#order-returned" />
+                        </svg>
+                        <span
+                          class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-yellow-600 text-sm font-medium text-white dark:bg-yellow-500 md:hidden"
+                        >
+                          0
+                        </span>
+                      </div>
+                      <div class="flex flex-col gap-y-1">
+                        <div class="hidden font-medium text-white md:block">
+                          0 سفارش
+                        </div>
+                        <div class="text-white">مرجوع شده</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<!--                <div class="mb-8">-->
+<!--                  <div-->
+<!--                    class="mb-8 flex flex-wrap items-center justify-between gap-4"-->
+<!--                  >-->
+<!--                    <h3 class="flex items-center gap-x-4 text-lg text-text/90">-->
+<!--                      <span class="h-2 w-2 rounded-full bg-primary"></span>-->
+<!--                      سفارشات فعلی-->
+<!--                    </h3>-->
+<!--                  </div>-->
+<!--                  <div class="space-y-4">-->
+<!--                    &lt;!&ndash; order item &ndash;&gt;-->
+<!--                    <div>-->
+<!--                      <a href="./profile-orders-detail-pending.html">-->
+<!--                        <div class="rounded-lg border p-4 shadow-base">-->
+<!--                          &lt;!&ndash; head &ndash;&gt;-->
+
+<!--                          <div class="flex items-center justify-between pb-6">-->
+<!--                            <div-->
+<!--                              class="flex items-center gap-x-2 text-yellow-500 dark:text-yellow-400"-->
+<!--                            >-->
+<!--                              <svg class="h-6 w-6">-->
+<!--                                <use xlink:href="#warning" />-->
+<!--                              </svg>-->
+<!--                              <p class="font-medium md:text-lg">-->
+<!--                                در انتظار پرداخت-->
+<!--                              </p>-->
+<!--                            </div>-->
+
+<!--                            <svg class="h-6 w-6">-->
+<!--                              <use xlink:href="#chevron-left" />-->
+<!--                            </svg>-->
+<!--                          </div>-->
+
+<!--                          &lt;!&ndash; conent &ndash;&gt;-->
+<!--                          <div-->
+<!--                            class="flex flex-col gap-6 lg:flex-row lg:justify-between xl:gap-16"-->
+<!--                          >-->
+<!--                            <div class="flex flex-col gap-4 md:flex-row">-->
+<!--                              <div-->
+<!--                                class="flex items-center justify-between gap-x-2 md:justify-start"-->
+<!--                              >-->
+<!--                                <div class="text-sm text-text/60 md:text-base">-->
+<!--                                  زمان باقیمانده-->
+<!--                                </div>-->
+<!--                                <div-->
+<!--                                  class="text-sm text-red-500 dark:text-red-400 md:text-base"-->
+<!--                                >-->
+<!--                                  10 دقیقه-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                              <div-->
+<!--                                class="flex items-center justify-between gap-x-2 md:justify-start"-->
+<!--                              >-->
+<!--                                <div class="text-sm text-text/60 md:text-base">-->
+<!--                                  شماره سفارش-->
+<!--                                </div>-->
+<!--                                <div class="text-sm text-text/90 md:text-base">-->
+<!--                                  #102030-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                              <div-->
+<!--                                class="flex items-center justify-between gap-x-2 md:justify-start"-->
+<!--                              >-->
+<!--                                <div class="text-sm text-text/60 md:text-base">-->
+<!--                                  مبلغ کل-->
+<!--                                </div>-->
+<!--                                <div class="text-primary">-->
+<!--                                  <span class="font-bold md:text-lg"-->
+<!--                                    >1,800,000</span-->
+<!--                                  >-->
+<!--                                  <span class="text-sm md:text-base"-->
+<!--                                    >تومان</span-->
+<!--                                  >-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; order item &ndash;&gt;-->
+<!--                    <div class="rounded-lg border shadow-base">-->
+<!--                      <a href="./profile-orders-detail.html">-->
+<!--                        <div class="p-4">-->
+<!--                          &lt;!&ndash; head &ndash;&gt;-->
+
+<!--                          <div class="flex items-center justify-between pb-6">-->
+<!--                            <div class="flex items-center gap-x-2 text-primary">-->
+<!--                              <svg class="h-6 w-6">-->
+<!--                                <use xlink:href="#outline-check" />-->
+<!--                              </svg>-->
+<!--                              <p class="font-medium md:text-lg">پرداخت شده</p>-->
+<!--                            </div>-->
+
+<!--                            <svg class="h-6 w-6">-->
+<!--                              <use xlink:href="#chevron-left" />-->
+<!--                            </svg>-->
+<!--                          </div>-->
+<!--                          &lt;!&ndash; conent &ndash;&gt;-->
+<!--                          <div-->
+<!--                            class="flex flex-col gap-6 xl:flex-row xl:justify-between xl:gap-16"-->
+<!--                          >-->
+<!--                            <div class="flex flex-col gap-4 md:flex-row">-->
+<!--                              <div-->
+<!--                                class="flex items-center justify-between gap-x-2 md:justify-start"-->
+<!--                              >-->
+<!--                                <div class="text-sm text-text/60 md:text-base">-->
+<!--                                  شماره سفارش-->
+<!--                                </div>-->
+<!--                                <div class="text-sm text-text/90 md:text-base">-->
+<!--                                  #102030-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                              <div-->
+<!--                                class="flex items-center justify-between gap-x-2 md:justify-start"-->
+<!--                              >-->
+<!--                                <div class="text-sm text-text/60 md:text-base">-->
+<!--                                  مبلغ کل-->
+<!--                                </div>-->
+<!--                                <div class="text-primary">-->
+<!--                                  <span class="font-bold md:text-lg"-->
+<!--                                    >122,800,000</span-->
+<!--                                  >-->
+<!--                                  <span class="text-sm md:text-base"-->
+<!--                                    >تومان</span-->
+<!--                                  >-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                              <div-->
+<!--                                class="flex items-center justify-between gap-x-2 md:justify-start"-->
+<!--                              >-->
+<!--                                <div class="text-sm text-text/60 md:text-base">-->
+<!--                                  تاریخ-->
+<!--                                </div>-->
+<!--                                <div class="text-sm text-text/90 md:text-base">-->
+<!--                                  03 / شهریور / 1402-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                            <div class="flex flex-grow flex-col gap-y-4">-->
+<!--                              &lt;!&ndash; order status &ndash;&gt;-->
+<!--                              <div-->
+<!--                                class="flex items-center gap-x-2 text-yellow-500 dark:text-yellow-400"-->
+<!--                              >-->
+<!--                                <svg class="h-5 w-5 md:h-6 md:w-6">-->
+<!--                                  <use xlink:href="#order-pending" />-->
+<!--                                </svg>-->
+<!--                                <p class="text-sm font-medium md:text-base">-->
+<!--                                  در انتظار تایید-->
+<!--                                </p>-->
+<!--                              </div>-->
+<!--                              &lt;!&ndash; order step &ndash;&gt;-->
+
+<!--                              <div-->
+<!--                                class="relative h-2 w-full rounded-full bg-background dark:bg-zinc-800"-->
+<!--                              >-->
+<!--                                <span-->
+<!--                                  class="absolute inset-y-0 right-0 rounded-full bg-yellow-500 dark:bg-yellow-400"-->
+<!--                                  style="width: 25%"-->
+<!--                                ></span>-->
+<!--                              </div>-->
+<!--                              &lt;!&ndash; order date &ndash;&gt;-->
+<!--                              <div-->
+<!--                                class="flex items-center justify-between text-sm text-yellow-500 dark:text-yellow-400 md:text-base"-->
+<!--                              >-->
+<!--                                <span> 11 / 06 / 1402 </span>-->
+<!--                                <span> ساعت 08 : 20 </span>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+              </div>
+            </div>
+{% endblock %}

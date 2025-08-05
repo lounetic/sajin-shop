@@ -1,0 +1,571 @@
+{% extends 'base-sidebar.html'%}{% load humanize %}
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+{% block title %} جزئیات سفارش 100{{order.id}} {% endblock %}
+{% block content %}
+            <!-- content -->
+            <div class="col-span-12 lg:col-span-9">
+              <div class="rounded-lg bg-muted p-5 shadow-base">
+                <div
+                  class="mb-16 flex flex-col items-center justify-between gap-y-8 xs:flex-row"
+                >
+                  <!-- Title -->
+                  <h1 class="relative w-fit text-xl font-medium">
+                    جزئیات سفارش 100{{order.id}}#
+                    <span
+                      class="absolute right-0 top-10 h-[3px] w-full rounded-full bg-primary"
+                    >
+                    </span>
+                  </h1>
+
+                  <a
+                    href="{% url 'account:profile-orders' %}"
+                    class="btn-secondary w-full px-4 py-2 xs:w-fit"
+                  >
+                    برگشت
+                    <svg class="h-5 w-5">
+                      <use xlink:href="#chevron-left" />
+                    </svg>
+                  </a>
+                </div>
+
+                <div class="mb-8">
+                  <div class="rounded-lg border shadow-base">
+                    <div class="p-4">
+                      <!-- head -->
+                      <div class="flex items-center justify-between pb-6">
+                        <div class="flex items-center gap-x-2 text-primary">
+                          <svg class="h-6 w-6">
+                            <use xlink:href="#outline-check"></use>
+                          </svg>
+                          <p class="font-medium md:text-lg">پرداخت شده</p>
+                        </div>
+                      </div>
+
+                      <!-- conent -->
+                      <div
+                        class="flex flex-col gap-6 pb-6 xl:flex-row xl:justify-between xl:gap-16"
+                      >
+                        <div class="flex flex-col gap-4 md:flex-row">
+                          <div
+                            class="flex items-center justify-between gap-x-2 md:justify-start"
+                          >
+                            <div class="text-sm text-text/60 md:text-base">
+                              کد پیگیری سفارش
+                            </div>
+                            <div class="text-sm text-text/90 md:text-base">
+                              607080
+                            </div>
+                          </div>
+                          <div
+                            class="flex items-center justify-between gap-x-2 md:justify-start"
+                          >
+                            <div class="text-sm text-text/60 md:text-base">
+                              مبلغ کل
+                            </div>
+                            <div class="text-primary">
+                              <span class="font-bold md:text-lg"
+                                >{{ order.total_price|intcomma}}</span
+                              >
+                              <span class="text-sm md:text-base">تومان</span>
+                            </div>
+                          </div>
+                          <div
+                            class="flex items-center justify-between gap-x-2 md:justify-start"
+                          >
+                            <div class="text-sm text-text/60 md:text-base">
+                              تاریخ
+                            </div>
+                            <div class="text-sm text-text/90 md:text-base">
+                              03 / شهریور / 1402
+                            </div>
+                          </div>
+                        </div>
+                        <div class="flex flex-grow flex-col gap-y-4">
+                          <!-- order status -->
+                          <div
+                            class="flex items-center gap-x-2 text-yellow-500 dark:text-yellow-400"
+                          >
+                            <svg class="h-5 w-5 md:h-6 md:w-6">
+                              <use xlink:href="#order-pending"></use>
+                            </svg>
+                            <p class="text-sm font-medium md:text-base">
+                              در انتظار تایید
+                            </p>
+                          </div>
+                          <!-- order step -->
+
+                          <div
+                            class="relative h-2 w-full rounded-full bg-background dark:bg-zinc-800"
+                          >
+                            <span
+                              class="absolute inset-y-0 right-0 rounded-full bg-yellow-500 dark:bg-yellow-400"
+                              style="width: 25%"
+                            ></span>
+                          </div>
+                          <!-- order date -->
+                          <div
+                            class="flex items-center justify-between text-sm text-yellow-500 dark:text-yellow-400 md:text-base"
+                          >
+                            <span> 11 / 06 / 1402 </span>
+                            <span> ساعت 08 : 20 </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-8">
+<!--                  <div class="rounded-lg border p-4 shadow-base">-->
+<!--                    <div class="mb-6 flex flex-col gap-4 md:flex-row flex-wrap">-->
+<!--                      <div-->
+<!--                        class="flex justify-between gap-x-2 lg:justify-start"-->
+<!--                      >-->
+<!--                        <div class="text-sm text-text/60 md:text-base">-->
+<!--                          مبلغ مرسوله-->
+<!--                        </div>-->
+<!--                        <div class="text-primary">-->
+<!--                          <span class="font-bold md:text-lg">122,800,000</span>-->
+<!--                          <span class="text-sm md:text-base">تومان</span>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div-->
+<!--                        class="flex justify-between gap-x-2 lg:justify-start"-->
+<!--                      >-->
+<!--                        <div class="text-sm text-text/60 md:text-base">-->
+<!--                          تخفیف کالا ها-->
+<!--                        </div>-->
+<!--                        <div class="text-red-500 dark:text-red-400">-->
+<!--                          <span class="font-bold md:text-lg">122,800,000</span>-->
+<!--                          <span class="text-sm md:text-base">تومان</span>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div-->
+<!--                        class="flex justify-between gap-x-2 lg:justify-start"-->
+<!--                      >-->
+<!--                        <div class="text-sm text-text/60 md:text-base">-->
+<!--                          کد تخفیف-->
+<!--                        </div>-->
+<!--                        <div class="text-red-500 dark:text-red-400">-->
+<!--                          <span class="font-bold md:text-lg">122,800,000</span>-->
+<!--                          <span class="text-sm md:text-base">تومان</span>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="flex flex-col gap-4 md:flex-row">-->
+<!--                      <div-->
+<!--                        class="flex justify-between gap-x-2 lg:justify-start"-->
+<!--                      >-->
+<!--                        <div class="text-sm text-text/60 md:text-base">-->
+<!--                          روش ارسال-->
+<!--                        </div>-->
+<!--                        <div class="text-sm text-text/90 md:text-base">-->
+<!--                          پست تیپاکس-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div-->
+<!--                        class="flex justify-between gap-x-2 lg:justify-start"-->
+<!--                      >-->
+<!--                        <div class="text-sm text-text/60 md:text-base">-->
+<!--                          هزینه ارسال-->
+<!--                        </div>-->
+<!--                        <div class="text-primary">-->
+<!--                          <span class="font-bold md:text-lg">122,800,000</span>-->
+<!--                          <span class="text-sm md:text-base">تومان</span>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div-->
+<!--                        class="flex justify-between gap-x-2 lg:justify-start"-->
+<!--                      >-->
+<!--                        <div class="text-sm text-text/60 md:text-base">-->
+<!--                          کد پیگیری مرسوله-->
+<!--                        </div>-->
+<!--                        <div class="text-sm text-text/90 md:text-base">-->
+<!--                          906040-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+                </div>
+                <div class="mb-8">
+                  <h2
+                    class="mb-8 flex items-center gap-x-4 text-lg text-text/90"
+                  >
+                    <span class="h-2 w-2 rounded-full bg-primary"></span>
+                    آدرس تحویل سفارش
+                  </h2>
+                  <div
+                    class="block rounded-lg border p-4 shadow-base hover:border-border/50 dark:hover:border-white/10"
+                  >
+                    <div
+                      class="mb-4 flex items-center justify-between gap-x-2 sm:mb-2"
+                    >
+                      <p
+                        class="line-clamp-2 h-10 text-sm text-text/90 xs:text-base sm:line-clamp-1 sm:h-6"
+                      >
+                        {{ order.address.address }}
+                      </p>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-x-2">
+                      <p class="line-clamp-1 text-sm text-text/60">
+                        {{ order.address.recipient_firstname }} {{ order.address.recipient_lastname }}
+                      </p>
+                      <div>
+                        <button
+                          data-modal-target="address-change-modal"
+                          data-modal-toggle="address-change-modal"
+                          class="btn-primary-nobg text-sm xs:px-4 xs:py-2 md:text-base"
+                        >
+                          <svg class="h-5 w-5">
+                            <use xlink:href="#address-edit" />
+                          </svg>
+                          تغییر آدرس تحویل
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-8">
+                  <h2
+                    class="mb-8 flex items-center gap-x-4 text-lg text-text/90"
+                  >
+                    <span class="h-2 w-2 rounded-full bg-primary"></span>
+                    اقلام سفارش
+                    <span class="text-sm text-text/60"> ( 2 کالا ) </span>
+                  </h2>
+                  <ul class="divide-y">
+                    {% for item in order_items %}
+                    <!-- Cart Item-->
+                    <li>
+                      <div class="py-4 sm:py-6">
+                        <div
+                          class="grid grid-cols-2 items-center justify-start gap-2 xs:grid-cols-3 xs:gap-6 sm:grid-cols-4 xl:grid-cols-6"
+                        >
+                          <!-- Image -->
+                          <div class="row-span-2 min-w-fit xs:mx-auto">
+                            <a href="./product-detail.html">
+                              <img
+                                alt=""
+                                class="w-25 rounded-lg sm:w-28"
+                                src="{{ item.product.main_image.url }}"
+                              />
+                            </a>
+                          </div>
+                          <!-- Detail -->
+                          <div
+                            class="row-span-2 space-y-4 xs:col-span-2 sm:col-span-3 xl:col-span-5"
+                          >
+                            <!-- Title -->
+                            <a
+                              class="line-clamp-2 text-sm md:text-base"
+                              href="./product-detail.html"
+                            >
+                            {{ item.product.title }}
+                            </a>
+                            <!-- Variant -->
+<!--                            <div class="flex items-center gap-x-2">-->
+<!--                              <span-->
+<!--                                class="h-4 w-4 rounded-full"-->
+<!--                                style="background: #782f2f"-->
+<!--                              ></span>-->
+<!--                              <span class="text-xs text-text/90 xs:text-sm">-->
+<!--                                قهوه ای</span-->
+<!--                              >-->
+<!--                            </div>-->
+<!--                            <div-->
+<!--                              class="flex flex-col items-start gap-x-2 text-red-500 dark:text-red-400 xs:flex-row xs:items-center"-->
+<!--                            >-->
+<!--                              <div class="text-xs xs:text-sm">تخفیف</div>-->
+<!--                              <div class="text-red-500 dark:text-red-400">-->
+<!--                                <span class="text-sm font-bold"-->
+<!--                                  >122,800,000</span-->
+<!--                                >-->
+<!--                                <span class="text-xs xs:text-sm">تومان</span>-->
+<!--                              </div>-->
+<!--                            </div>-->
+                          </div>
+                          <!-- Quantity -->
+                          <div
+                            class="flex items-center gap-x-2 xs:justify-center"
+                          >
+                            <div
+                              class="flex h-10 w-24 items-center justify-center gap-x-3 rounded-lg border px-4 py-1 sm:w-28"
+                            >
+                              <div
+                                class="flex h-5 w-5 select-none items-center justify-center text-sm font-medium sm:h-6 sm:w-6 sm:text-lg"
+                              >
+                                {{ item.quantity }}
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Price -->
+                          <div
+                            class="row-span-2 xs:col-span-2 sm:col-span-3 xl:col-span-5"
+                          >
+                            <div
+                              class="text-primary xs:col-span-2 sm:col-span-3 lg:text-lg xl:col-span-5"
+                            >
+                              <span class="font-bold">{{ item.price|intcomma }}</span>
+                              <span class="text-sm lg:text-base">تومان</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Mobile Profile Menu Drawer -->
+      <div
+        aria-labelledby="profile-menu-drawer-navigation-label"
+        class="fixed bottom-0 left-0 right-0 z-40 w-full translate-y-full rounded-t-3xl bg-muted transition-transform duration-300"
+        id="profile-menu-drawer-navigation"
+        tabindex="-1"
+      >
+        <div
+          class="flex items-center justify-between gap-x-4 border-b p-4 pb-5"
+        >
+          <h5 class="text-lg text-text/90">منوی پنل کاربری</h5>
+          <button
+            aria-controls="user-account-drawer-navigation"
+            class="inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-text/90 hover:bg-zinc-100 hover:text-gray-900 dark:hover:bg-black dark:hover:text-white"
+            data-drawer-hide="profile-menu-drawer-navigation"
+            type="button"
+          >
+            <svg class="h-5 w-5">
+              <use xlink:href="#close" />
+            </svg>
+
+            <span class="sr-only">Close menu</span>
+          </button>
+        </div>
+        <div class="p-4">
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="./profile-dashboard.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#home" />
+                  </svg>
+                  <div>پیشخوان</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-orders.html"
+                class="profile-menu profile-menu-active flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#order" />
+                  </svg>
+                  <div>سفارش ها</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-favorite.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#heart" />
+                  </svg>
+                  <div>علاقه‌مندی ها</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-recent.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#recent" />
+                  </svg>
+                  <div>بازدید های اخیر</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-notification.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#notification" />
+                  </svg>
+                  <div>پیام ها</div>
+                </div>
+                <div
+                  class="flex h-6 w-6 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white dark:bg-emerald-600"
+                >
+                  10
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-address.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#address" />
+                  </svg>
+                  <div>آدرس ها</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="./profile-edit.html"
+                class="profile-menu flex items-center justify-between rounded-lg px-2 py-4 xl:px-4"
+              >
+                <div class="flex items-center gap-x-4">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#user-setting" />
+                  </svg>
+                  <div>اطلاعات حساب کاربری</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                class="flex items-center justify-between rounded-lg p-4 text-red-500 hover:bg-warning/10 dark:text-red-400 dark:hover:bg-red-400/10"
+                href="#"
+              >
+                <div class="flex items-center gap-x-2">
+                  <svg class="h-6 w-6">
+                    <use xlink:href="#exit"></use>
+                  </svg>
+                  <span> خروج </span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Address Change modal -->
+      <div
+        id="address-change-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="main-scroll fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full overflow-y-auto overflow-x-hidden p-4 md:inset-0"
+      >
+        <div class="relative max-h-full w-full max-w-2xl">
+          <div
+            class="divide-y overflow-hidden rounded-lg bg-muted shadow ring-1 ring-gray-100 dark:ring-white/5"
+          >
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h3 class="md:text-lg">تغییر آدرس تحویل</h3>
+
+                <button
+                  class=" "
+                  data-modal-hide="address-change-modal"
+                  type="button"
+                >
+                  <svg class="h-5 w-5">
+                    <use xlink:href="#close" />
+                  </svg>
+
+                  <span class="sr-only">Close menu</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-6 px-4 py-5 sm:p-6">
+              <fieldset class="space-y-6">
+                <legend class="sr-only">Address</legend>
+
+                <div>
+                  <input
+                    type="radio"
+                    name="address"
+                    value="address-1"
+                    id="address-1"
+                    class="peer hidden"
+                  />
+
+                  <label
+                    for="address-1"
+                    class="relative block cursor-pointer rounded-lg border p-4 shadow-base peer-checked:border-emerald-500 hover:border-border/50 peer-checked:dark:border-emerald-400 dark:hover:border-white/10"
+                  >
+                    <div
+                      class="mb-4 flex items-center justify-between gap-x-2 sm:mb-2"
+                    >
+                      <p
+                        class="line-clamp-2 h-10 text-sm text-text/90 xs:text-base sm:line-clamp-1 sm:h-6"
+                      >
+                        استان تهران شهر تهران - خیابان گاندی جنوبی - نبش خیابان
+                        ۲۱ - پلاک ۲۸
+                      </p>
+                    </div>
+
+                    <p class="line-clamp-1 text-sm text-text/60">
+                      تایماز اکبری
+                    </p>
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="address"
+                    value="address-2"
+                    id="address-2"
+                    class="peer hidden"
+                  />
+
+                  <label
+                    for="address-2"
+                    class="relative block cursor-pointer rounded-lg border p-4 shadow-base peer-checked:border-emerald-500 hover:border-border/50 peer-checked:dark:border-emerald-400 dark:hover:border-white/10"
+                  >
+                    <div
+                      class="mb-4 flex items-center justify-between gap-x-2 sm:mb-2"
+                    >
+                      <p
+                        class="line-clamp-2 h-10 text-sm text-text/90 xs:text-base sm:line-clamp-1 sm:h-6"
+                      >
+                        استان تهران شهر تهران - خیابان گاندی جنوبی - نبش خیابان
+                        ۲۱ - پلاک ۲۸
+                      </p>
+                    </div>
+
+                    <p class="line-clamp-1 text-sm text-text/60">
+                      تایماز اکبری
+                    </p>
+                  </label>
+                </div>
+              </fieldset>
+              <div class="flex justify-end">
+                <button class="btn-primary w-full px-4 py-2 md:w-auto">
+                  <span>
+                    <svg class="h-5 w-5">
+                      <use xlink:href="#address-edit" />
+                    </svg>
+                  </span>
+                  <span> انتخاب آدرس جدید </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
