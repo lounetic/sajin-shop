@@ -1,6 +1,6 @@
 Sajin Shop
 
-Django e-commerce project: online handmade art shop
+Ongoing Django e-commerce project: Online Handmade Art Shop
 
 Run:
   ```sh
