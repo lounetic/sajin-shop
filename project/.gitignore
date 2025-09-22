@@ -7,7 +7,3 @@ media/
 # Environments
 env/
 venv/
-
-# Migrations
-*/migrations/*
-!*/migrations/__init__.py
