@@ -8,6 +8,6 @@ Run:
 # activate venv
 venv\Scripts\activate  # Windows
 source venv/bin/activate  # Linux/Mac
-pip install -r requirements.txt
-python manage.py runserver
+pip install -r project/requirements.txt
+py manage.py runserver
   ```
