@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'shop',
-    'tests',
+    'store',
     'django.contrib.humanize',
 ]
 
@@ -66,7 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'tests.context_processors.cart'
+                'store.context_processors.cart'
             ],
         },
     },

@@ -19,7 +19,7 @@ from .models import User, City, Province, Address
 from django.http import JsonResponse
 from django.core.mail import send_mail
 
-from tests.models import Order
+from store.models import Order
 
 
 def login_mobile(request):
@@ -27,6 +27,7 @@ def login_mobile(request):
         phone = request.POST.get('phone')
         if phone:
             request.session['phone'] = phone
+            request.session['otp_purpose'] = 'login'
             if cache.get('phone'):
                 return redirect(reverse('account:verify-otp'))
             send_otp(phone)
@@ -69,8 +70,8 @@ def verify_otp(request):
         cache_otp = cache.get(phone)
         if cache_otp and str(cache_otp) == otp:
             user, _ = User.objects.get_or_create(phone=phone,
-                                              defaults={'username':phone,
-                                                        'email':f'{phone}@mail.com'})
+                                                 defaults={'username': phone,
+                                                           'email': f'{phone}@mail.com'})
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             cache.delete('phone')
             return redirect(reverse('shop:index'))
@@ -108,7 +109,6 @@ def profile_edit(request):
     # return render(request, 'profile-edit.html')
     password_form = SetPasswordForm(user=request.user)
     change_password_form = SetPasswordForm(user=request.user)
-    # Other forms like email_form = ChangeEmailForm(...)
     is_password = False
     if request.user.password != "":
         is_password = True
@@ -137,6 +137,7 @@ def profile_edit(request):
             phone = request.POST.get('phone')
             if phone:
                 request.session['phone'] = phone
+                request.session['otp_purpose'] = 'change_number'
                 if cache.get('phone'):
                     return redirect(reverse('account:verify-otp'))
                 send_otp(phone)
@@ -163,8 +164,7 @@ def profile_address(request):
             address = form.save(commit=False)
             address.user = request.user
             address.save()
-            # Optional: redirect or show a success message
-            return redirect('account:profile-address')  # better UX than re-rendering
+            return redirect('account:profile-address')
     else:
         form = AddressForm()
 
@@ -193,9 +193,9 @@ def edit_address(request, address_id):
         address.postal_code = request.POST.get('postal_code')
 
         address.save()
-        return redirect('account:profile-address')  # or wherever your address list is shown
+        return redirect('account:profile-address')
 
-    return redirect('account:profile-address')  # don't allow GET, just redirect
+    return redirect('account:profile-address')
 
 
 @login_required

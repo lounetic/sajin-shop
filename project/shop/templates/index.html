@@ -88,7 +88,7 @@
               </h3>
               <a
                 class="flex items-center gap-x-2 py-2 text-sm text-primary lg:text-base"
-                href="{% url 'tests:store' %}"
+                href="{% url 'store:store' %}"
               >
                 مشاهده همه
                 <span>
@@ -113,7 +113,7 @@
                     >
                       <!-- image -->
                       <div class="mb-2 md:mb-5" draggable="false">
-                        <a href="{% url 'tests:productdetail' id=product.id %}">
+                        <a href="{% url 'store:productdetail' id=product.id %}">
                           <img
                             alt=""
                             class="mx-auto w-32 rounded-lg md:w-auto"
@@ -191,7 +191,7 @@
               <!-- Category -->
               <a
                 class="relative flex w-25 flex-col items-center justify-between gap-y-1.5 sm:w-auto sm:gap-y-2.5"
-                href="{% url 'tests:store'%}"
+                href="{% url 'store:store'%}"
               >
                 <div
                   class="border-gradient group relative rounded-full p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-full"
@@ -209,7 +209,7 @@
               {% for item in category_data %}
               <a
                 class="relative flex w-25 flex-col items-center justify-between gap-y-1.5 sm:w-auto sm:gap-y-2.5"
-                href="{% url 'tests:category_store' slug=item.category.slug %}"
+                href="{% url 'store:category_store' slug=item.category.slug %}"
               >
                 <div
                   class="border-gradient group relative rounded-full p-px before:absolute before:-inset-px before:h-[calc(100%+2px)] before:w-[calc(100%+2px)] before:rounded-full"

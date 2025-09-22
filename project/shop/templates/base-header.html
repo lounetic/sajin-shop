@@ -1302,7 +1302,7 @@
                         <div class="text-sm text-text/90">{{cart.cart_length}} مورد</div>
                         <a
                           class="flex items-center gap-x-1 text-sm text-primary"
-                          href="{% url 'tests:checkoutcart' %}"
+                          href="{% url 'store:checkoutcart' %}"
                         >
                           <div>مشاهده سبد خرید</div>
                           <div>
@@ -1331,7 +1331,7 @@
                                     src="{{item.product.main_image.url}}"
                                   />
                                 </a>
-                                <a href="{% url 'tests:removefromcart' item.product.id %}">
+                                <a href="{% url 'store:removefromcart' item.product.id %}">
                                 <button
                                   class="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-background"
                                   type="button"
@@ -1424,7 +1424,7 @@
                             <span class="text-sm">تومان</span>
                           </div>
                         </div>
-                        <a href="{% url 'tests:checkoutshipping' %}">
+                        <a href="{% url 'store:checkoutshipping' %}">
                           <button
                             class="btn-primary w-32 py-3 text-sm"
                             type="button"
@@ -1448,7 +1448,7 @@
                                                                 <p class=" text-text/90   text-lg">
                                                                     سبد خرید شما خالی میباشد
                                                                 </p>
-                                                                <a class="btn-primary w-full py-3" href="{% url 'tests:store' %}">
+                                                                <a class="btn-primary w-full py-3" href="{% url 'store:store' %}">
                                                                     فروشگاه
                                                                 </a>
                                                             </div>
@@ -1520,7 +1520,7 @@
                         <li>
                           <a
                             class="hover:dark: flex rounded-lg px-4 py-3 hover:text-primary"
-                            href="{% url 'tests:store'%}"
+                            href="{% url 'store:store'%}"
                           >
                             همه محصولات
                           </a>
@@ -1529,7 +1529,7 @@
                         <li>
                           <a
                             class="hover:dark: flex rounded-lg px-4 py-3 hover:text-primary"
-                            href="{% url 'tests:category_store' slug=category.slug %}"
+                            href="{% url 'store:category_store' slug=category.slug %}"
                           >
                             {{category.title}}
                           </a>
@@ -1540,12 +1540,12 @@
                   </ul>
 
                   <ul data-color-dark="#f87171" data-color-light="#ef4444">
-                    <a class="group" href="./special-sale.html">
+                    <a class="group" href="#">
                       <div class="p-2 pt-0">فروش ویژه</div>
                     </a>
                   </ul>
                   <ul data-color-dark="#eab308" data-color-light="#eab308">
-                    <a class="group" href="./how-to-buy.html">
+                    <a class="group" href="#">
                       <div class="p-2 pt-0">راهنمای خرید</div>
                     </a>
                   </ul>
@@ -1564,7 +1564,7 @@
                         <li>
                           <a
                             class="hover:dark: flex rounded-lg px-4 py-3 hover:text-primary"
-                            href="./contact.html"
+                            href="#"
                           >
                             تماس با ما
                           </a>
@@ -1572,7 +1572,7 @@
                         <li>
                           <a
                             class="hover:dark: flex rounded-lg px-4 py-3 hover:text-primary"
-                            href="./about.html"
+                            href="#"
                           >
                             درباره ما
                           </a>
@@ -1580,7 +1580,7 @@
                         <li>
                           <a
                             class="hover:dark: flex rounded-lg px-4 py-3 hover:text-primary"
-                            href="./faq.html"
+                            href="#"
                           >
                             سوالات متداول
                           </a>
@@ -2966,7 +2966,7 @@
             item.classList.add('search-suggestion');
             item.innerHTML = `<div class="swiper-slide">
                               <a
-                                href="/tests/store/${product.id}"
+                                href="/store/store/${product.id}"
                                 class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
                               >
                                 <img

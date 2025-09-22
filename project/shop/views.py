@@ -1,13 +1,12 @@
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.shortcuts import render
-from tests.models import Category, Product
-from tests.cart import Cart
+from store.models import Category, Product
+from store.cart import Cart
 from django.http import JsonResponse
 from django.db.models import Q
 import json
 import random
 
-# Create your views here.
 def index(request):
     products = Product.objects.all()
     categories = Category.objects.all()
