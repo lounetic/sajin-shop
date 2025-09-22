@@ -28,9 +28,9 @@ class OrderAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
   list_display = ['id', 'title', 'slug']
 
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-  list_display = ['id', 'title', 'price', 'category__title', 'quantity']
+# @admin.register(Product)
+# class ProductAdmin(admin.ModelAdmin):
+#   list_display = ['id', 'title', 'price', 'category__title', 'quantity']
 
 # @admin.register(Size)
 # class SizeAdmin(admin.ModelAdmin):
