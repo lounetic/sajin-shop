@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+db.sqlite3        # نسخه اصلی دیتابیس
+*.sqlite3         # همه فایل‌های SQLite که نسخه اصلی هستن
+media/            # اگه فایل‌های آپلود داری
+staticfiles/      # فایل‌های جمع شده استاتیک
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
